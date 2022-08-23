@@ -1,0 +1,52 @@
+
+plugins {
+    id 'org.tenio.java-conventions'
+}
+
+ext {
+    project_name = "${sub_core}"
+}
+
+description = "${project_root_name}-${project_name}"
+
+jar {
+    baseName "${project_root_name}-${project_name}"
+}
+
+
+repositories {
+    maven { url "$aliyunMavenPublicUrl" }
+    maven {
+        url "$zzMavenPublicUrl"
+        allowInsecureProtocol = true
+    }
+    mavenCentral()
+}
+
+dependencies {
+    api 'org.slf4j:slf4j-api:1.7.36'
+    api 'io.netty:netty-buffer:4.1.75.Final'
+    api 'cn.hutool:hutool-cache:5.8.5'
+    api 'org.apache.commons:commons-collections4:4.4'
+}
+
+publishing {
+    repositories {
+        maven {
+            allowInsecureProtocol = true
+            name "zzMaven"
+            url = version.endsWith('SNAPSHOT') ? "${zzMavenSnapshotsUrl}" : "${zzMavenReleaseUrl}"
+
+            credentials {
+                username "${zz_maven_repository_username}"
+                password "${zz_maven_repository_password}"
+            }
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            groupId = "${project_group}"
+            artifactId = "${project_root_name}-${project_name}"
+        }
+    }
+}

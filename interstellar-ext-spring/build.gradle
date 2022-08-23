@@ -1,0 +1,49 @@
+
+plugins {
+    id 'org.tenio.java-conventions'
+}
+
+ext {
+    project_name = "${sub_ext_spring}"
+}
+
+description = "${project_root_name}-${project_name}"
+
+jar {
+    baseName "${project_root_name}-${project_name}"
+}
+
+
+repositories {
+    maven { url "$aliyunMavenPublicUrl" }
+    maven {
+        url "$zzMavenPublicUrl"
+        allowInsecureProtocol = true
+    }
+    mavenCentral()
+}
+
+dependencies {
+    api project(":${project_root_name}-${sub_core}")
+}
+
+publishing {
+    repositories {
+        maven {
+            allowInsecureProtocol = true
+            name "zzMaven"
+            url = version.endsWith('SNAPSHOT') ? "${zzMavenSnapshotsUrl}" : "${zzMavenReleaseUrl}"
+
+            credentials {
+                username "${zz_maven_repository_username}"
+                password "${zz_maven_repository_password}"
+            }
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            groupId = "${project_group}"
+            artifactId = "${project_root_name}-${project_name}"
+        }
+    }
+}
