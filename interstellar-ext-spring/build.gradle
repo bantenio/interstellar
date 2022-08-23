@@ -25,6 +25,7 @@ repositories {
 
 dependencies {
     api project(":${project_root_name}-${sub_core}")
+    compileOnly 'org.springframework:spring-expression:5.0.9.RELEASE'
 }
 
 publishing {
