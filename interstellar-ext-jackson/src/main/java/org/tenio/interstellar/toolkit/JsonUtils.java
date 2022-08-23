@@ -76,7 +76,7 @@ public class JsonUtils {
         }
     }
 
-    public static final TypeReference<Map<String, Object>> MAP_STRING_OBJECT_TYPE_REFERENCE = new TypeReference<>() {
+    public static final TypeReference<Map<String, Object>> MAP_STRING_OBJECT_TYPE_REFERENCE = new TypeReference<Map<String, Object>>() {
     };
 
     public static Map<String, Object> fromJsonToMap(String json) {

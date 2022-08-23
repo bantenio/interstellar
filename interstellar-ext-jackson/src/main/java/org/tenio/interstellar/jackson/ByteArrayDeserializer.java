@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import java.io.IOException;
 import java.time.Instant;
 
-import static com.weshare.zoo.tools.Utils.BASE64_DECODER;
+import static org.tenio.interstellar.context.Utils.BASE64_DECODER;
 
 public class ByteArrayDeserializer extends JsonDeserializer<byte[]> {
 
