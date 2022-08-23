@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class DataObjectDeserializer extends JsonDeserializer<DataObject> {
+
     public static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<Map<String, Object>>() {
     };
 
