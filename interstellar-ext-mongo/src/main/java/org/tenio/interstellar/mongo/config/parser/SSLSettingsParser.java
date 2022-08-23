@@ -1,14 +1,14 @@
 package org.tenio.interstellar.mongo.config.parser;
 
+import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.mongodb.ConnectionString;
 import com.mongodb.connection.SslSettings;
-import com.weshare.zoo.ext.mongo.config.MongoClientProperties;
-import com.weshare.zoo.ext.mongo.config.PemKeyCertOptions;
-import com.weshare.zoo.ext.mongo.config.PemTrustOptions;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.tenio.interstellar.mongo.config.MongoClientProperties;
+import org.tenio.interstellar.mongo.config.PemKeyCertOptions;
+import org.tenio.interstellar.mongo.config.PemTrustOptions;
 
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
@@ -37,10 +37,10 @@ public class SSLSettingsParser {
         MongoClientProperties.SSLProperties ssl = config.getSsl();
         final PemKeyCertOptions pemKeyCertOptions = new PemKeyCertOptions();
         final PemTrustOptions pemTrustOptions = new PemTrustOptions();
-        if (StringUtils.isNoneBlank(ssl.getCaPath())) {
+        if (StrUtil.isNotBlank(ssl.getCaPath())) {
             pemTrustOptions.addCertPath(ssl.getCaPath());
         }
-        if (!StringUtils.isAnyBlank(ssl.getKeyPath(), ssl.getCertPath())) {
+        if (StrUtil.isAllNotBlank(ssl.getKeyPath(), ssl.getCertPath())) {
             pemKeyCertOptions.addKeyPath(ssl.getKeyPath());
             pemKeyCertOptions.addCertPath(ssl.getCertPath());
         }
@@ -73,7 +73,7 @@ public class SSLSettingsParser {
     private void fromConfiguration(SslSettings.Builder builder) {
         if (config.getSsl() != null) {
             builder.enabled(config.getSsl().isEnabled());
-            builder.invalidHostNameAllowed(ObjectUtils.defaultIfNull(config.getSsl().getSslInvalidHostNameAllowed(), false));
+            builder.invalidHostNameAllowed(ObjectUtil.defaultIfNull(config.getSsl().getSslInvalidHostNameAllowed(), false));
         }
     }
 }

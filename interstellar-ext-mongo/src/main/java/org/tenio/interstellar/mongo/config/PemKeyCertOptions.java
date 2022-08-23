@@ -1,8 +1,8 @@
 package org.tenio.interstellar.mongo.config;
 
-import com.weshare.zoo.buffer.Buffer;
-import com.weshare.zoo.ext.mongo.config.parser.KeyStoreHelper;
-import org.apache.commons.io.FileUtils;
+import cn.hutool.core.io.FileUtil;
+import org.tenio.interstellar.buffer.Buffer;
+import org.tenio.interstellar.mongo.config.parser.KeyStoreHelper;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.X509KeyManager;
@@ -281,13 +281,13 @@ public class PemKeyCertOptions {
         if (helper == null) {
             List<Buffer> keys = new ArrayList<>();
             for (String keyPath : keyPaths) {
-                String content = FileUtils.readFileToString(new File(keyPath), StandardCharsets.UTF_8);
+                String content = FileUtil.readString(new File(keyPath), StandardCharsets.UTF_8);
                 keys.add(Buffer.buffer(content));
             }
             keys.addAll(keyValues);
             List<Buffer> certs = new ArrayList<>();
             for (String certPath : certPaths) {
-                String content = FileUtils.readFileToString(new File(certPath), StandardCharsets.UTF_8);
+                String content = FileUtil.readString(new File(certPath), StandardCharsets.UTF_8);
                 certs.add(Buffer.buffer(content));
             }
             certs.addAll(certValues);

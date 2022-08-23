@@ -1,13 +1,13 @@
 package org.tenio.interstellar.mongo.config;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.mongodb.*;
 import com.mongodb.connection.*;
-import com.weshare.zoo.ext.mongo.DataObjectCodec;
-import com.weshare.zoo.ext.mongo.config.parser.*;
-import org.apache.commons.lang3.ObjectUtils;
 import org.bson.codecs.*;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
+import org.tenio.interstellar.context.mongo.DataObjectCodec;
+import org.tenio.interstellar.mongo.config.parser.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -23,7 +23,7 @@ public class MongoClientOptionsParser {
         Objects.requireNonNull(config);
 
         MongoClientSettings.Builder options = MongoClientSettings.builder();
-        options.codecRegistry(CodecRegistries.fromRegistries(commonCodecRegistry, CodecRegistries.fromCodecs(new DataObjectCodec(ObjectUtils.defaultIfNull(config.getUseObjectId(), false)))));
+        options.codecRegistry(CodecRegistries.fromRegistries(commonCodecRegistry, CodecRegistries.fromCodecs(new DataObjectCodec(ObjectUtil.defaultIfNull(config.getUseObjectId(), false)))));
 
         // All parsers should support connection_string first
         String cs = config.getConnectionString();

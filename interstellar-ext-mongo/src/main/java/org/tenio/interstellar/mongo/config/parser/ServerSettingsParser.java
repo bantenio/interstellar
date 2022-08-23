@@ -1,7 +1,7 @@
 package org.tenio.interstellar.mongo.config.parser;
 
 import com.mongodb.connection.ServerSettings;
-import com.weshare.zoo.ext.mongo.config.MongoClientProperties;
+import org.tenio.interstellar.mongo.config.MongoClientProperties;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 

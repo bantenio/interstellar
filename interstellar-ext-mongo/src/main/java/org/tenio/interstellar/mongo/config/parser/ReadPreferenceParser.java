@@ -4,7 +4,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.ReadPreference;
 import com.mongodb.Tag;
 import com.mongodb.TagSet;
-import com.weshare.zoo.ext.mongo.config.MongoClientProperties;
+import org.tenio.interstellar.mongo.config.MongoClientProperties;
 
 import java.util.ArrayList;
 import java.util.List;

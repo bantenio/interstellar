@@ -4,7 +4,7 @@ import com.mongodb.ConnectionString;
 import com.mongodb.ServerAddress;
 import com.mongodb.connection.ClusterConnectionMode;
 import com.mongodb.connection.ClusterSettings;
-import com.weshare.zoo.ext.mongo.config.MongoClientProperties;
+import org.tenio.interstellar.mongo.config.MongoClientProperties;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,9 @@
 package org.tenio.interstellar.context.mybatis;
 
-import com.weshare.zoo.context.DataObject;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapper;
 import org.apache.ibatis.reflection.wrapper.ObjectWrapperFactory;
+import org.tenio.interstellar.context.DataObject;
 
 public class DataObjectWrapperFactory implements ObjectWrapperFactory {
     @Override

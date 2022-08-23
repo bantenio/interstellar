@@ -1,12 +1,12 @@
 package org.tenio.interstellar.context.mybatis;
 
-import com.weshare.zoo.context.DataArray;
-import com.weshare.zoo.context.DataObject;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
 import org.apache.ibatis.reflection.factory.ObjectFactory;
 import org.apache.ibatis.reflection.property.PropertyTokenizer;
 import org.apache.ibatis.reflection.wrapper.MapWrapper;
+import org.tenio.interstellar.context.DataArray;
+import org.tenio.interstellar.context.DataObject;
 
 import java.util.List;
 

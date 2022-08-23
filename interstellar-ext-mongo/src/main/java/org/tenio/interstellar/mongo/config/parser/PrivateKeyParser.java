@@ -1,7 +1,7 @@
 package org.tenio.interstellar.mongo.config.parser;
 
-import com.weshare.zoo.buffer.Buffer;
-import com.weshare.zoo.ext.mongo.exception.MongoException;
+import org.tenio.interstellar.buffer.Buffer;
+import org.tenio.interstellar.mongo.exception.MongoException;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;

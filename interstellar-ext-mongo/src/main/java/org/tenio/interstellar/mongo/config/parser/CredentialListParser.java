@@ -1,9 +1,9 @@
 package org.tenio.interstellar.mongo.config.parser;
 
+import cn.hutool.core.util.StrUtil;
 import com.mongodb.AuthenticationMechanism;
 import com.mongodb.MongoCredential;
-import com.weshare.zoo.ext.mongo.config.MongoClientProperties;
-import org.apache.commons.lang3.StringUtils;
+import org.tenio.interstellar.mongo.config.MongoClientProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class CredentialListParser {
             char[] password = (passwd == null) ? null : passwd.toCharArray();
             // See https://github.com/vert-x3/vertx-mongo-client/issues/46 - 'admin' as default is a security
             // concern, use  the 'db_name' if none is set.
-            String authSource = StringUtils.defaultIfBlank(mongoClientProperties.getAuthSource(), mongoClientProperties.getDbName());
+            String authSource = StrUtil.blankToDefault(mongoClientProperties.getAuthSource(), mongoClientProperties.getDbName());
 
             // MongoCredential
             String gssapiServiceName = mongoClientProperties.getGssapiServiceName();

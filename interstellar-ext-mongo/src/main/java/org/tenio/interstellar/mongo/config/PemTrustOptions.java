@@ -1,15 +1,14 @@
 package org.tenio.interstellar.mongo.config;
 
-import com.weshare.zoo.buffer.Buffer;
-import com.weshare.zoo.ext.mongo.config.parser.KeyStoreHelper;
-import com.weshare.zoo.ext.mongo.exception.MongoException;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.util.StrUtil;
+import org.tenio.interstellar.buffer.Buffer;
+import org.tenio.interstellar.mongo.config.parser.KeyStoreHelper;
+import org.tenio.interstellar.mongo.exception.MongoException;
 
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.File;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.KeyStore;
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class PemTrustOptions {
      */
     public PemTrustOptions addCertPath(String certPath) throws NullPointerException {
         Objects.requireNonNull(certPath, "No null certificate accepted");
-        if (StringUtils.isBlank(certPath)) {
+        if (StrUtil.isBlank(certPath)) {
             throw new NullPointerException("No empty certificate path accepted");
         }
         certPaths.add(certPath);
@@ -118,8 +117,8 @@ public class PemTrustOptions {
                     map(path -> (new File(path))).
                     map(file -> {
                         try {
-                            return Buffer.buffer(FileUtils.readFileToString(file, StandardCharsets.UTF_8));
-                        } catch (IOException e) {
+                            return Buffer.buffer(FileUtil.readString(file, StandardCharsets.UTF_8));
+                        } catch (Exception e) {
                             throw new MongoException(e);
                         }
                     });
