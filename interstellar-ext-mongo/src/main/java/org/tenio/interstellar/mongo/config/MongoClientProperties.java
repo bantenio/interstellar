@@ -462,9 +462,9 @@ public class MongoClientProperties {
 
     public static class SSLProperties {
 
-        private Boolean enabled;
+        private boolean enabled;
 
-        private Boolean trustAll;
+        private boolean trustAll;
 
         private Boolean sslInvalidHostNameAllowed;
         private String caPath;
