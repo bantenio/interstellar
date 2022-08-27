@@ -18,19 +18,19 @@ public class MongoClientProperties {
 
     private String connectionString;
 
-    private ClusterProperties cluster;
+    private ClusterProperties cluster = new ClusterProperties();
 
-    private ConnectionPoolProperties pool;
+    private ConnectionPoolProperties pool = new ConnectionPoolProperties();
 
-    private SocketProperties socket;
+    private SocketProperties socket = new SocketProperties();
 
-    private SSLProperties ssl;
+    private SSLProperties ssl = new SSLProperties();
 
-    private WriteConcernProperties writeConcern;
+    private WriteConcernProperties writeConcern = new WriteConcernProperties();
 
-    private ReadPreferenceProperties readPreference;
+    private ReadPreferenceProperties readPreference = new ReadPreferenceProperties();
 
-    private ServerSettingsProperties serverSettings;
+    private ServerSettingsProperties serverSettings = new ServerSettingsProperties();
 
     private String authMechanism;
 
@@ -462,9 +462,9 @@ public class MongoClientProperties {
 
     public static class SSLProperties {
 
-        private boolean enabled;
+        private Boolean enabled;
 
-        private boolean trustAll;
+        private Boolean trustAll;
 
         private Boolean sslInvalidHostNameAllowed;
         private String caPath;

@@ -11,13 +11,13 @@ plugins {
 
 repositories {
     mavenLocal()
-    maven =
+    maven {
         url = uri('https://repo.maven.apache.org/maven2/')
     }
 }
 
 group = "org.tenio.${project_root_name}"
-version = '0.0.2'
+version = '0.0.3'
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 java {
