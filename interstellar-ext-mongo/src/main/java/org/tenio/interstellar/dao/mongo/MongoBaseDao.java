@@ -22,18 +22,15 @@ public class MongoBaseDao implements Dao {
 
     private final MongoDatabase database;
 
-    private String collName;
+    private final String collName;
 
     public MongoBaseDao(MongoDatabase database, String collName) {
         this.database = database;
+        this.collName = collName;
     }
 
     public String getCollName() {
         return collName;
-    }
-
-    public void setCollName(String collName) {
-        this.collName = collName;
     }
 
     @Override
