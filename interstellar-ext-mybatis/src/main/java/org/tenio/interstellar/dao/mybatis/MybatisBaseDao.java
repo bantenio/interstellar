@@ -1,95 +1,158 @@
 package org.tenio.interstellar.dao.mybatis;
 
-import org.apache.ibatis.annotations.*;
 import org.tenio.interstellar.context.DataArray;
 import org.tenio.interstellar.context.DataObject;
 import org.tenio.interstellar.dao.Dao;
 
 import java.util.List;
 
-public interface MybatisBaseDao extends Dao {
+public class MybatisBaseDao implements Dao {
+    private final String tableName;
 
-    @InsertProvider(type = BaseSqlProvider.class, method = "save")
-    void save(DataObject data);
+    private final BaseMapper baseMapper;
 
-    @InsertProvider(type = BaseSqlProvider.class, method = "saveAll")
-    void saveAll(DataArray datas);
+    public MybatisBaseDao(BaseMapper baseMapper, String tableName) {
+        this.tableName = tableName;
+        this.baseMapper = baseMapper;
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "one")
-    DataObject one(DataObject condition);
+    @Override
+    public void save(DataObject data) {
+        baseMapper.save(tableName, data);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "oneWithFields")
-    DataObject oneWithFields(@Param("condition") DataObject condition, @Param("fields") DataObject fields);
+    @Override
+    public void saveAll(DataArray datas) {
+        baseMapper.saveAll(tableName, datas);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "byId")
-    DataObject byId(Object id);
+    @Override
+    public DataObject one(DataObject condition) {
+        return baseMapper.one(tableName, condition);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "byIdWithFields")
-    DataObject byIdWithFields(Object id, @Param("fields") DataObject fields);
+    @Override
+    public DataObject oneWithFields(DataObject condition, DataObject fields) {
+        return baseMapper.oneWithFields(tableName, condition, fields);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "inIdsWithList")
-    List<DataObject> inIdsWithList(List<?> ids);
+    @Override
+    public DataObject byId(Object id) {
+        return baseMapper.byId(tableName, id);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "inIdsWithDataArray")
-    List<DataObject> inIdsWithDataArray(DataArray ids);
+    @Override
+    public DataObject byIdWithFields(Object id, DataObject fields) {
+        return baseMapper.byIdWithFields(tableName, id, fields);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "inIdsWithListSort")
-    List<DataObject> inIdsWithListSort(@Param("ids") List<?> ids, @Param("sort") DataObject sort);
+    @Override
+    public List<DataObject> inIdsWithList(List<?> ids) {
+        return baseMapper.inIdsWithList(tableName, ids);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "inIdsWithDataArraySort")
-    List<DataObject> inIdsWithDataArraySort(@Param("ids") DataArray ids, @Param("sort") DataObject sort);
+    @Override
+    public List<DataObject> inIdsWithDataArray(DataArray ids) {
+        return baseMapper.inIdsWithDataArray(tableName, ids);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "all")
-    List<DataObject> all();
+    @Override
+    public List<DataObject> inIdsWithListSort(List<?> ids, DataObject sort) {
+        return baseMapper.inIdsWithListSort(tableName, ids, sort);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "allWithSort")
-    List<DataObject> allWithSort(DataObject sort);
+    @Override
+    public List<DataObject> inIdsWithDataArraySort(DataArray ids, DataObject sort) {
+        return baseMapper.inIdsWithDataArraySort(tableName, ids, sort);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "find")
-    List<DataObject> find(@Param("condition") DataObject condition);
+    @Override
+    public List<DataObject> all() {
+        return baseMapper.all(tableName);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "findWithSort")
-    List<DataObject> findWithSort(@Param("condition") DataObject condition, @Param("sort") DataObject sort);
+    @Override
+    public List<DataObject> allWithSort(DataObject sort) {
+        return baseMapper.allWithSort(tableName, sort);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "findWithPage")
-    List<DataObject> findWithPage(@Param("condition") DataObject condition, int current, int size);
+    @Override
+    public List<DataObject> find(DataObject condition) {
+        return baseMapper.find(tableName, condition);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "findWithPageSort")
-    List<DataObject> findWithPageSort(@Param("condition") DataObject condition, int current, int size, @Param("sort") DataObject sort);
+    @Override
+    public List<DataObject> findWithSort(DataObject condition, DataObject sort) {
+        return baseMapper.findWithSort(tableName, condition, sort);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "findScroll")
-    List<DataObject> findScroll(@Param("condition") DataObject condition, int startIndex, int size, @Param("sort") DataObject sort);
+    @Override
+    public List<DataObject> findWithPage(DataObject condition, int current, int size) {
+        return baseMapper.findWithPage(tableName, condition, current, size);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "count")
-    Long count(@Param("conditionFields") DataObject conditionFields);
+    @Override
+    public List<DataObject> findWithPageSort(DataObject condition, int current, int size, DataObject sort) {
+        return baseMapper.findWithPageSort(tableName, condition, current, size, sort);
+    }
 
-    @UpdateProvider(type = BaseSqlProvider.class, method = "update")
-    void update(@Param("condition") DataObject condition, @Param("setFields") DataObject setFields);
+    @Override
+    public List<DataObject> findScroll(DataObject condition, int startIndex, int size, DataObject sort) {
+        return baseMapper.findScroll(tableName, condition, startIndex, size, sort);
+    }
 
-    @UpdateProvider(type = BaseSqlProvider.class, method = "upsert")
-    void upsert(@Param("condition") DataObject condition, @Param("setFields") DataObject setFields);
+    @Override
+    public Long count(DataObject conditionFields) {
+        return baseMapper.count(tableName, conditionFields);
+    }
 
-    @UpdateProvider(type = BaseSqlProvider.class, method = "upsertAll")
-    void upsertAll(DataArray datas);
+    @Override
+    public void update(DataObject condition, DataObject setFields) {
+        baseMapper.update(tableName, condition, setFields);
+    }
 
-    @UpdateProvider(type = BaseSqlProvider.class, method = "updateById")
-    void updateById(DataObject entity);
+    @Override
+    public void upsert(DataObject condition, DataObject setFields) {
+        throw new UnsupportedOperationException();
+    }
 
-    @DeleteProvider(type = BaseSqlProvider.class, method = "remove")
-    void remove(DataObject condition);
+    @Override
+    public void upsertAll(DataArray datas) {
+        throw new UnsupportedOperationException();
+    }
 
-    @DeleteProvider(type = BaseSqlProvider.class, method = "removeById")
-    void removeById(DataObject entity);
+    @Override
+    public void updateById(DataObject entity) {
+        baseMapper.updateById(tableName, entity);
+    }
 
-    @DeleteProvider(type = BaseSqlProvider.class, method = "removeByIds")
-    void removeByIds(DataArray ids);
+    @Override
+    public void remove(DataObject condition) {
+        baseMapper.remove(tableName, condition);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "aggregateScroll")
-    List<DataObject> aggregateScroll(int startIndex, int size, @Param("sort") DataObject sort, @Param("aggregates") DataArray aggregates);
+    @Override
+    public void removeById(DataObject entity) {
+        baseMapper.removeById(tableName, entity);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "aggregateToCount")
-    Long aggregateToCount(DataArray aggregates);
+    @Override
+    public void removeByIds(DataArray ids) {
+        baseMapper.removeByIds(tableName, ids);
+    }
 
-    @SelectProvider(type = BaseSqlProvider.class, method = "aggregate")
-    List<DataObject> aggregate(DataArray aggregates);
+    @Override
+    public List<DataObject> aggregateScroll(int startIndex, int size, DataObject sort, DataArray aggregates) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Long aggregateToCount(DataArray aggregates) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<DataObject> aggregate(DataArray aggregates) {
+        throw new UnsupportedOperationException();
+    }
 }
