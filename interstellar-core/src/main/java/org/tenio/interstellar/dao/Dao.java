@@ -51,9 +51,13 @@ public interface Dao {
 
     void updateById(DataObject entity);
 
+    void updateById(Object id, DataObject entity);
+
     void remove(DataObject condition);
 
     void removeById(DataObject entity);
+
+    void removeById(Object id);
 
     void removeByIds(DataArray ids);
 

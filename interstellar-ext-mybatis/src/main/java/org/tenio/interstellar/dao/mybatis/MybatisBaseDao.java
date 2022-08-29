@@ -127,6 +127,11 @@ public class MybatisBaseDao implements Dao {
     }
 
     @Override
+    public void updateById(Object id, DataObject entity) {
+        baseMapper.updateById(tableName, id, entity);
+    }
+
+    @Override
     public void remove(DataObject condition) {
         baseMapper.remove(tableName, condition);
     }
@@ -134,6 +139,11 @@ public class MybatisBaseDao implements Dao {
     @Override
     public void removeById(DataObject entity) {
         baseMapper.removeById(tableName, entity);
+    }
+
+    @Override
+    public void removeById(Object id) {
+        baseMapper.removeById(tableName, id);
     }
 
     @Override

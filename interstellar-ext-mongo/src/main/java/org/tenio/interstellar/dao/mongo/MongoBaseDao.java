@@ -5,6 +5,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.ReplaceOneModel;
+import com.mongodb.client.model.ReplaceOptions;
 import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.WriteModel;
 import org.bson.Document;
@@ -192,7 +193,7 @@ public class MongoBaseDao implements Dao {
             ReplaceOneModel<Document> documentReplaceOneModel = new ReplaceOneModel<>(
                     new Document(dataObject.getMap()), // filter
                     new Document(dataObject.getMap()), // update
-                    new UpdateOptions().upsert(true)
+                    new ReplaceOptions().upsert(true)
             );
             writes.add(documentReplaceOneModel);
         }
@@ -201,9 +202,14 @@ public class MongoBaseDao implements Dao {
 
     @Override
     public void updateById(DataObject entity) {
+        updateById(entity.getValue("_id"), entity);
+    }
+
+    @Override
+    public void updateById(Object id, DataObject entity) {
         MongoCollection<Document> collection = database.getCollection(collName);
         Document conditionDoc = new Document();
-        conditionDoc.put("_id", entity.getValue("_id"));
+        conditionDoc.put("_id", id);
         collection.updateOne(conditionDoc, new Document(entity.getMap()));
     }
 
@@ -216,9 +222,14 @@ public class MongoBaseDao implements Dao {
 
     @Override
     public void removeById(DataObject entity) {
+        removeById(entity.getValue("_id"));
+    }
+
+    @Override
+    public void removeById(Object id) {
         MongoCollection<Document> collection = database.getCollection(collName);
         Document conditionDoc = new Document();
-        conditionDoc.put("_id", entity.getValue("_id"));
+        conditionDoc.put("_id", id);
         collection.deleteOne(conditionDoc);
     }
 
