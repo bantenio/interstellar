@@ -128,7 +128,7 @@ public class MybatisBaseDao implements Dao {
 
     @Override
     public void updateById(Object id, DataObject entity) {
-        baseMapper.updateById(tableName, id, entity);
+        baseMapper.updateByIdWithEntity(tableName, id, entity);
     }
 
     @Override
@@ -138,7 +138,7 @@ public class MybatisBaseDao implements Dao {
 
     @Override
     public void removeById(DataObject entity) {
-        baseMapper.removeById(tableName, entity);
+        baseMapper.removeByIdWithEntity(tableName, entity);
     }
 
     @Override

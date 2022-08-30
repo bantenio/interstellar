@@ -70,13 +70,13 @@ public interface BaseMapper {
     void updateById(String tableName, @Param("entity") DataObject entity);
 
     @UpdateProvider(type = BaseSqlProvider.class, method = "updateById")
-    void updateById(String tableName, @Param("id") Object id, @Param("entity") DataObject entity);
+    void updateByIdWithEntity(String tableName, @Param("id") Object id, @Param("entity") DataObject entity);
 
     @DeleteProvider(type = BaseSqlProvider.class, method = "remove")
     void remove(String tableName, @Param("condition") DataObject condition);
 
     @DeleteProvider(type = BaseSqlProvider.class, method = "removeByEntityId")
-    void removeById(String tableName, @Param("entity") DataObject entity);
+    void removeByIdWithEntity(String tableName, @Param("entity") DataObject entity);
 
     @DeleteProvider(type = BaseSqlProvider.class, method = "removeById")
     void removeById(String tableName, @Param("id") Object id);
