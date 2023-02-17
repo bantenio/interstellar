@@ -12,16 +12,6 @@ jar {
     baseName "${project_root_name}-${project_name}"
 }
 
-
-repositories {
-    maven { url "$aliyunMavenPublicUrl" }
-    maven {
-        url "$zzMavenPublicUrl"
-        allowInsecureProtocol = true
-    }
-    mavenCentral()
-}
-
 dependencies {
     api project(":${project_root_name}-${sub_core}")
     api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.2'

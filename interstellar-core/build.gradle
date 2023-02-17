@@ -13,16 +13,6 @@ jar {
     baseName "${project_root_name}-${project_name}"
 }
 
-
-repositories {
-    maven { url "$aliyunMavenPublicUrl" }
-    maven {
-        url "$zzMavenPublicUrl"
-        allowInsecureProtocol = true
-    }
-    mavenCentral()
-}
-
 dependencies {
     api 'org.slf4j:slf4j-api:1.7.36'
     api 'io.netty:netty-buffer:4.1.75.Final'

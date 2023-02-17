@@ -4,7 +4,7 @@ plugins {
 }
 
 ext {
-    project_name = "${sub_ext_mongo}"
+    project_name = "${sub_ext_reactor}"
 }
 
 description = "${project_root_name}-${project_name}"
@@ -15,8 +15,8 @@ jar {
 
 dependencies {
     api project(":${project_root_name}-${sub_core}")
-    api group: 'org.mongodb', name: 'bson', version: '4.7.1'
-    api group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.11'
+
+    api 'io.projectreactor:reactor-core:3.5.2'
 }
 
 publishing {

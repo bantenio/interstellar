@@ -1,3 +1,8 @@
 rootProject.name = "${project_root_name}"
 
-include "${project_root_name}-${sub_core}", "${project_root_name}-${sub_ext_jackson}", "${project_root_name}-${sub_ext_mongo}", "${project_root_name}-${sub_ext_mybatis}", "${project_root_name}-${sub_ext_spring}"
+include "${project_root_name}-${sub_core}",
+        "${project_root_name}-${sub_ext_jackson}",
+        "${project_root_name}-${sub_ext_mongo}",
+        "${project_root_name}-${sub_ext_mybatis}",
+        "${project_root_name}-${sub_ext_spring}",
+        "${project_root_name}-${sub_ext_reactor}"

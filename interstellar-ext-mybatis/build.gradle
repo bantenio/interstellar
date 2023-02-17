@@ -13,16 +13,6 @@ jar {
     baseName "${project_root_name}-${project_name}"
 }
 
-
-repositories {
-    maven { url "$aliyunMavenPublicUrl" }
-    maven {
-        url "$zzMavenPublicUrl"
-        allowInsecureProtocol = true
-    }
-    mavenCentral()
-}
-
 dependencies {
     api project(":${project_root_name}-${sub_core}")
 
