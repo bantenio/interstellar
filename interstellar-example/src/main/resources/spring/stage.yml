@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:mysql://20.1.100.6:33306/zpanda?useUnicode=true&characterEncoding=utf8&useSSL=false
+    password: So0GY6qfhWvwjPDJ
+    username: nlb_test_rw

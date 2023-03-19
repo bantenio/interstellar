@@ -3,10 +3,10 @@
  *
  * This project uses @Incubating APIs which are subject to change.
  */
-
 plugins {
     id 'java-library'
-    id 'maven-publish'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
 }
 
 repositories {
@@ -24,14 +24,12 @@ java {
     withSourcesJar()
 }
 
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from(components.java)
-        }
-    }
-}
-
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+dependencies {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc'
 }

@@ -1,0 +1,42 @@
+logging:
+  config: classpath:logback.xml
+  level:
+    root: DEBUG
+app:
+  name: example
+  active: ${env}
+spring:
+  profiles:
+    active: ${env}
+  application:
+    name: ${app.name}
+  main:
+    allow-circular-references: true
+server:
+  servlet:
+    context-path: /${app.name}
+
+---
+
+
+spring:
+  config:
+    activate:
+      on-profile: online
+    import: classpath:spring/common.yml,file:/data/config/${app.name}/prod.yml
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+    import: classpath:spring/common.yml,classpath:spring/stage.yml
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+    import: classpath:spring/common.yml,classpath:spring/local.yml

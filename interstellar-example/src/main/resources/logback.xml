@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="stdout.pattern" value="${CONSOLE_LOG_PATTERN:-%d [%thread] %-5level %X{THREAD_ID} %logger{36} %line - [TxId:%X{PtxId},SpanId:%X{PspanId}] - %X{biz.sn}%msg%n}"/>
+    <property name="applog.file.path" value="logs"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${stdout.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="AppLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${applog.file.path}/catalina.log</file>
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${applog.file.path}/catalina.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <totalSizeCap>30GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${stdout.pattern}</pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <root level="DEBUG">
+        <appender-ref ref="AppLog"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

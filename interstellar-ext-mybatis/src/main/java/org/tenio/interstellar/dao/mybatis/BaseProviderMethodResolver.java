@@ -1,15 +1,25 @@
 package org.tenio.interstellar.dao.mybatis;
 
+import cn.hutool.core.text.CharSequenceUtil;
+import org.apache.ibatis.builder.annotation.ProviderContext;
+import org.apache.ibatis.builder.annotation.ProviderMethodResolver;
 import org.apache.ibatis.jdbc.SQL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.tenio.interstellar.context.DataArray;
 import org.tenio.interstellar.context.DataObject;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class BaseSqlProvider {
+public class BaseProviderMethodResolver implements ProviderMethodResolver {
+    private static final Logger log = LoggerFactory.getLogger(BaseProviderMethodResolver.class);
+    private static final Map<Class<?>, String> TYPE_TABLE_NAME_MAPPING = new ConcurrentHashMap<>();
 
+    // region helper functions
     protected SQL withSort(SQL sql, DataObject sort) {
         if (sort != null && !sort.isEmpty()) {
             for (Map.Entry<String, Object> entry : sort.getMap().entrySet()) {
@@ -50,23 +60,38 @@ public class BaseSqlProvider {
         return sql;
     }
 
-    public String save(String tableName, DataObject entity) {
+    public static Class<?> entityType(ProviderContext context) {
+        Class<?> clazz = context.getMapperType();
+        return (Class<?>) ((ParameterizedType) (clazz.getGenericInterfaces()[0])).getActualTypeArguments()[0];
+    }
+
+    protected String getTableName(ProviderContext providerContext) {
+        return TYPE_TABLE_NAME_MAPPING.computeIfAbsent(entityType(providerContext),
+                clazz -> CharSequenceUtil.toUnderlineCase(clazz.getSimpleName()));
+    }
+
+    protected String tableName(ProviderContext providerContext) {
+        return getTableName(providerContext);
+    }
+    // endregion
+
+    public String save(DataObject entity, ProviderContext providerContext) {
         Set<String> fields = entity.fieldNames();
         SQL sql = new SQL();
-        sql.INSERT_INTO(tableName);
+        sql.INSERT_INTO(tableName(providerContext));
         for (String field : fields) {
             sql.VALUES(field, "#{entity." + field + "}");
         }
         return sql.toString();
     }
 
-    public String saveAll(String tableName, DataArray entities) {
+    public String saveAll(DataArray entities, ProviderContext providerContext) {
         if (entities == null || entities.size() == 0) {
             throw new NullPointerException();
         }
         List<DataObject> list = entities.getList();
         SQL sql = new SQL();
-        sql.INSERT_INTO(tableName);
+        sql.INSERT_INTO(tableName(providerContext));
         String[] fields = list.get(0).fieldNames().toArray(new String[0]);
         sql.INTO_COLUMNS(fields);
         StringBuilder sb = new StringBuilder();
@@ -91,43 +116,43 @@ public class BaseSqlProvider {
         return sql.toString();
     }
 
-    public String one(String tableName, DataObject condition) {
-        return oneWithFields(tableName, condition, new DataObject().put("*", ""));
+    public String one(DataObject condition, ProviderContext providerContext) {
+        return oneWithFields(condition, new DataObject().put("*", ""), providerContext);
     }
 
-    public String oneWithFields(String tableName, DataObject condition, DataObject fields) {
+    public String oneWithFields(DataObject condition, DataObject fields, ProviderContext providerContext) {
         String[] fieldsName = fields.fieldNames().toArray(new String[0]);
         SQL sql = new SQL();
         sql.SELECT(fieldsName);
-        sql.FROM(tableName);
+        sql.FROM(tableName(providerContext));
         return withCondition(sql, condition).toString();
     }
 
-    public String byId(String tableName, Object id) {
+    public String byId(ProviderContext providerContext) {
         return new SQL()
                 .SELECT("*")
-                .FROM(tableName)
+                .FROM(tableName(providerContext))
                 .WHERE("id=#{id}")
                 .toString();
     }
 
-    public String byIdWithFields(String tableName, Object id, DataObject fields) {
+    public String byIdWithFields(Object id, DataObject fields, ProviderContext providerContext) {
         String[] fieldsName = fields.fieldNames().toArray(new String[0]);
         return new SQL()
                 .SELECT(fieldsName)
-                .FROM(tableName)
+                .FROM(tableName(providerContext))
                 .WHERE("id=#{id}")
                 .toString();
     }
 
-    public String inIdsWithList(String tableName, List<?> ids) {
-        return inIdsWithListSort(tableName, ids, null);
+    public String inIdsWithList(List<?> ids, ProviderContext providerContext) {
+        return inIdsWithListSort(ids, null, providerContext);
     }
 
-    public String inIdsWithListSort(String tableName, List<?> ids, DataObject sort) {
+    public String inIdsWithListSort(List<?> ids, DataObject sort, ProviderContext providerContext) {
         SQL sql = new SQL()
                 .SELECT("*")
-                .FROM(tableName);
+                .FROM(tableName(providerContext));
         StringBuilder whereBuf = new StringBuilder("id in (");
         int collIndex = 0;
         for (int i = 0; i < ids.size(); i++) {
@@ -140,54 +165,54 @@ public class BaseSqlProvider {
         return withSort(sql, sort).toString();
     }
 
-    public String inIdsWithDataArray(String tableName, DataArray ids) {
-        return inIdsWithDataArraySort(tableName, ids, null);
+    public String inIdsWithDataArray(DataArray ids, ProviderContext providerContext) {
+        return inIdsWithDataArraySort(ids, null, providerContext);
     }
 
-    public String inIdsWithDataArraySort(String tableName, DataArray ids, DataObject sort) {
+    public String inIdsWithDataArraySort(DataArray ids, DataObject sort, ProviderContext providerContext) {
         SQL sql = new SQL()
                 .SELECT("*")
-                .FROM(tableName);
+                .FROM(tableName(providerContext));
         withIds(sql, ids);
         withSort(sql, sort);
         return sql.toString();
     }
 
-    public String all(String tableName) {
-        return allWithSort(tableName, null);
+    public String all(ProviderContext providerContext) {
+        return allWithSort(null, providerContext);
     }
 
-    public String allWithSort(String tableName, DataObject sort) {
+    public String allWithSort(DataObject sort, ProviderContext providerContext) {
         SQL sql = new SQL()
                 .SELECT("*")
-                .FROM(tableName);
+                .FROM(tableName(providerContext));
         return withSort(sql, sort).toString();
     }
 
-    public String find(String tableName, DataObject condition) {
-        return findWithSort(tableName, condition, null);
+    public String find(DataObject condition, ProviderContext providerContext) {
+        return findWithSort(condition, null, providerContext);
     }
 
-    public String findWithSort(String tableName, DataObject condition, DataObject sort) {
-        return findWithPageSort(tableName, condition, -1, -1, sort);
+    public String findWithSort(DataObject condition, DataObject sort, ProviderContext providerContext) {
+        return findWithPageSort(condition, -1, -1, sort, providerContext);
     }
 
-    public String findWithPage(String tableName, DataObject condition, int current, int size) {
-        return findWithPageSort(tableName, condition, current, size, null);
+    public String findWithPage(DataObject condition, int current, int size, ProviderContext providerContext) {
+        return findWithPageSort(condition, current, size, null, providerContext);
     }
 
-    public String findWithPageSort(String tableName, DataObject condition, int current, int size, DataObject sort) {
+    public String findWithPageSort(DataObject condition, int current, int size, DataObject sort, ProviderContext providerContext) {
         int offset = -1;
         if (current > 0 && size > 0) {
             offset = (current - 1) * size;
         }
-        return findScroll(tableName, condition, offset, size, sort);
+        return findScroll(condition, offset, size, sort, providerContext);
     }
 
-    public String findScroll(String tableName, DataObject condition, int startIndex, int size, DataObject sort) {
+    public String findScroll(DataObject condition, int startIndex, int size, DataObject sort, ProviderContext providerContext) {
         SQL sql = new SQL()
                 .SELECT("*")
-                .FROM(tableName);
+                .FROM(tableName(providerContext));
         withCondition(sql, condition);
         withSort(sql, sort);
         if (startIndex > 0 && size > 0) {
@@ -196,23 +221,23 @@ public class BaseSqlProvider {
         return sql.toString();
     }
 
-    public String count(String tableName, DataObject condition) {
+    public String count(DataObject condition, ProviderContext providerContext) {
         SQL sql = new SQL()
                 .SELECT("count(1)")
-                .FROM(tableName);
+                .FROM(tableName(providerContext));
         return withCondition(sql, condition).toString();
     }
 
-    public String update(String tableName, DataObject condition, DataObject setFields) {
+    public String update(DataObject condition, DataObject setFields, ProviderContext providerContext) {
         SQL sql = new SQL()
-                .UPDATE(tableName);
+                .UPDATE(tableName(providerContext));
         withSetFields(sql, setFields);
         return withCondition(sql, condition).toString();
     }
 
-    public String updateByEntityId(String tableName, DataObject entity) {
+    public String updateByEntityId(DataObject entity, ProviderContext providerContext) {
         SQL sql = new SQL()
-                .UPDATE(tableName);
+                .UPDATE(tableName(providerContext));
         for (Map.Entry<String, Object> entry : entity.getMap().entrySet()) {
             sql.SET(entry.getKey() + "=#{entity." + entry.getKey() + "}");
         }
@@ -220,9 +245,9 @@ public class BaseSqlProvider {
         return sql.toString();
     }
 
-    public String updateById(String tableName, Object id, DataObject entity) {
+    public String updateById(Object id, DataObject entity, ProviderContext providerContext) {
         SQL sql = new SQL()
-                .UPDATE(tableName);
+                .UPDATE(tableName(providerContext));
         for (Map.Entry<String, Object> entry : entity.getMap().entrySet()) {
             sql.SET(entry.getKey() + "=#{entity." + entry.getKey() + "}");
         }
@@ -231,29 +256,29 @@ public class BaseSqlProvider {
     }
 
 
-    public String remove(String tableName, DataObject condition) {
+    public String remove(DataObject condition, ProviderContext providerContext) {
         SQL sql = new SQL()
-                .DELETE_FROM(tableName);
+                .DELETE_FROM(tableName(providerContext));
         return withCondition(sql, condition).toString();
     }
 
-    public String removeByEntityId(String tableName, DataObject entity) {
+    public String removeByEntityId(DataObject entity, ProviderContext providerContext) {
         return new SQL()
-                .DELETE_FROM(tableName)
+                .DELETE_FROM(tableName(providerContext))
                 .WHERE("id=#{entity.id}")
                 .toString();
     }
 
-    public String removeById(String tableName, Object id) {
+    public String removeById(Object id, ProviderContext providerContext) {
         return new SQL()
-                .DELETE_FROM(tableName)
+                .DELETE_FROM(tableName(providerContext))
                 .WHERE("id=#{id}")
                 .toString();
     }
 
-    public String removeByIds(String tableName, DataArray ids) {
+    public String removeByIds(DataArray ids, ProviderContext providerContext) {
         SQL sql = new SQL()
-                .DELETE_FROM(tableName);
+                .DELETE_FROM(tableName(providerContext));
         withIds(sql, ids);
         return sql.toString();
     }

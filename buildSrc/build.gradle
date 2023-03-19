@@ -3,7 +3,6 @@
  *
  * This project uses @Incubating APIs which are subject to change.
  */
-
 plugins {
     // Support convention plugins written in Groovy. Convention plugins are build scripts in 'src/main' that automatically become available as plugins in the main build.
     id 'groovy-gradle-plugin'
@@ -12,4 +11,8 @@ plugins {
 repositories {
     // Use the plugin portal to apply community plugins in convention plugins.
     gradlePluginPortal()
+}
+
+dependencies {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '3.0.2'
 }

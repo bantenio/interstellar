@@ -1,0 +1,23 @@
+logging:
+  file:
+    name: ${spring.application.name}
+  pattern:
+    console: "%d [%thread] %-5level %X{THREAD_ID} %logger{36} %line - [TxId:%X{PtxId},SpanId:%X{PspanId}] - %X{biz.sn}%msg%n"
+
+app:
+  unique:
+    snow:
+      dataCenterId: 1
+      workerId: 1
+      table: 57dombvhq18iazc9
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 60000
+      max-lifetime: 120000
+mybatis:
+  mapper-locations: classpath:mapper/**/*Mapper.xml
+  config-location: classpath:mybatis.xml
