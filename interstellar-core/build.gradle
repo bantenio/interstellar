@@ -3,41 +3,10 @@ plugins {
     id 'org.tenio.java-conventions'
 }
 
-ext {
-    project_name = "${sub_core}"
-}
-
-description = "${project_root_name}-${project_name}"
-
-jar {
-    baseName "${project_root_name}-${project_name}"
-}
-
 dependencies {
-    compileOnlyApi 'org.slf4j:slf4j-api:2.0.6'
-    compileOnlyApi 'io.netty:netty-buffer:4.1.87.Final'
-    compileOnlyApi 'cn.hutool:hutool-core:5.8.12'
-    compileOnlyApi 'cn.hutool:hutool-cache:5.8.12'
-    compileOnlyApi 'org.apache.commons:commons-collections4:4.4'
-}
-
-publishing {
-    repositories {
-        maven {
-            allowInsecureProtocol = true
-            name "zzMaven"
-            url = version.endsWith('SNAPSHOT') ? "${zzMavenSnapshotsUrl}" : "${zzMavenReleaseUrl}"
-
-            credentials {
-                username "${zz_maven_repository_username}"
-                password "${zz_maven_repository_password}"
-            }
-        }
-    }
-    publications {
-        maven(MavenPublication) {
-            groupId = "${project_group}"
-            artifactId = "${project_root_name}-${project_name}"
-        }
-    }
+    compileOnlyApi group: 'org.slf4j', name: 'jul-to-slf4j', version: "${Slf4jVersion}"
+    compileOnlyApi group: 'io.netty', name: 'netty-buffer', version: "${NettyVersion}"
+    compileOnlyApi group: 'cn.hutool', name: 'hutool-core', version: "${HutoolVersion}"
+    compileOnlyApi group: 'cn.hutool', name: 'hutool-cache', version: "${HutoolVersion}"
+    compileOnlyApi group: 'org.apache.commons', name: 'commons-collections4', version: "${CommonsCollections4}"
 }

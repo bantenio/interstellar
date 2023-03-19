@@ -2,40 +2,9 @@ plugins {
     id 'org.tenio.java-conventions'
 }
 
-ext {
-    project_name = "${sub_ext_jackson}"
-}
-
-description = "${project_root_name}-${project_name}"
-
-jar {
-    baseName "${project_root_name}-${project_name}"
-}
-
 dependencies {
     api project(":${project_root_name}-${sub_core}")
-    compileOnlyApi group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.1'
-    compileOnlyApi group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.14.1'
-    compileOnlyApi group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.14.1'
-}
-
-publishing {
-    repositories {
-        maven {
-            allowInsecureProtocol = true
-            name "zzMaven"
-            url = version.endsWith('SNAPSHOT') ? "${zzMavenSnapshotsUrl}" : "${zzMavenReleaseUrl}"
-
-            credentials {
-                username "${zz_maven_repository_username}"
-                password "${zz_maven_repository_password}"
-            }
-        }
-    }
-    publications {
-        maven(MavenPublication) {
-            groupId = "${project_group}"
-            artifactId = "${project_root_name}-${project_name}"
-        }
-    }
+    compileOnlyApi group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${JacksonVersion}"
+    compileOnlyApi group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: "${JacksonVersion}"
+    compileOnlyApi group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: "${JacksonVersion}"
 }
