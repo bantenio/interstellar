@@ -14,11 +14,11 @@ jar {
 }
 
 dependencies {
-    api 'org.slf4j:slf4j-api:2.0.6'
-    api 'io.netty:netty-buffer:4.1.87.Final'
-    api 'cn.hutool:hutool-core:5.8.12'
-    api 'cn.hutool:hutool-cache:5.8.12'
-    api 'org.apache.commons:commons-collections4:4.4'
+    compileOnlyApi 'org.slf4j:slf4j-api:2.0.6'
+    compileOnlyApi 'io.netty:netty-buffer:4.1.87.Final'
+    compileOnlyApi 'cn.hutool:hutool-core:5.8.12'
+    compileOnlyApi 'cn.hutool:hutool-cache:5.8.12'
+    compileOnlyApi 'org.apache.commons:commons-collections4:4.4'
 }
 
 publishing {

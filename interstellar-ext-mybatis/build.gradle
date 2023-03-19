@@ -16,7 +16,7 @@ jar {
 dependencies {
     api project(":${project_root_name}-${sub_core}")
 
-    api group: 'org.mybatis', name: 'mybatis', version: '3.5.11'
+    compileOnlyApi group: 'org.mybatis', name: 'mybatis', version: '3.5.11'
 }
 
 publishing {

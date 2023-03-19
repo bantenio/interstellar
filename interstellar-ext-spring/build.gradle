@@ -15,7 +15,7 @@ jar {
 
 dependencies {
     api project(":${project_root_name}-${sub_ext_jackson}")
-    api 'org.springframework:spring-expression:6.0.4'
+    compileOnlyApi 'org.springframework:spring-expression:6.0.4'
 }
 
 publishing {

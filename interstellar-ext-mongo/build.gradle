@@ -15,8 +15,8 @@ jar {
 
 dependencies {
     api project(":${project_root_name}-${sub_core}")
-    api group: 'org.mongodb', name: 'bson', version: '4.7.1'
-    api group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.11'
+    compileOnlyApi group: 'org.mongodb', name: 'bson', version: '4.9.0'
+    compileOnlyApi group: 'org.mongodb', name: 'mongodb-driver-sync', version: '4.9.0'
 }
 
 publishing {

@@ -16,7 +16,7 @@ jar {
 dependencies {
     api project(":${project_root_name}-${sub_core}")
 
-    api 'io.projectreactor:reactor-core:3.5.2'
+    compileOnlyApi 'io.projectreactor:reactor-core:3.5.2'
 }
 
 publishing {

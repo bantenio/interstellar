@@ -14,9 +14,9 @@ jar {
 
 dependencies {
     api project(":${project_root_name}-${sub_core}")
-    api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.1'
-    api group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.14.1'
-    api group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.14.1'
+    compileOnlyApi group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.1'
+    compileOnlyApi group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.14.1'
+    compileOnlyApi group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: '2.14.1'
 }
 
 publishing {
