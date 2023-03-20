@@ -210,7 +210,7 @@ public class MongoBaseDao implements Dao {
         MongoCollection<Document> collection = database.getCollection(collName);
         Document conditionDoc = new Document();
         conditionDoc.put("_id", id);
-        collection.updateOne(conditionDoc, new Document(entity.getMap()));
+        collection.updateOne(conditionDoc, new Document("$set", new Document(entity.getMap())));
     }
 
     @Override
