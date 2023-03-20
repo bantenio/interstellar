@@ -3,6 +3,7 @@ package org.tenio.interstellar.toolkit;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.tenio.interstellar.context.Utils;
 import org.tenio.interstellar.jackson.ObjectMapperFactory;
 
 import java.io.IOException;
@@ -25,6 +26,14 @@ public class JsonUtils {
     private static ObjectMapper getOrCreate(String key, Function<String, ObjectMapper> objectMapperFunction) {
         return objectMapperCache.computeIfAbsent(key, objectMapperFunction);
     }
+
+    public static final Function<Object, ?> JSON_NODE_CLONER = o -> {
+        if (o instanceof JsonNode) {
+            return ((JsonNode) o).deepCopy();
+        }
+        return Utils.DEFAULT_CLONER.apply(o);
+    };
+
     private static ObjectMapper getOrCreate(String key) {
         return getOrCreate(key, ObjectMapperFactory::objectMapper);
     }

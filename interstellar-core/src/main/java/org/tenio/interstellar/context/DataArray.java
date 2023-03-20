@@ -5,6 +5,7 @@ import org.tenio.interstellar.lang.Copyable;
 
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
@@ -267,9 +268,13 @@ public class DataArray implements Iterable<Object>, Copyable {
 
     @Override
     public DataArray copy() {
+        return copy(Utils.DEFAULT_CLONER);
+    }
+
+    public DataArray copy(Function<Object, ?> cloner) {
         List<Object> copiedList = new ArrayList<>(list.size());
         for (Object val : list) {
-            copiedList.add(Utils.checkAndCopy(val));
+            copiedList.add(Utils.checkAndCopy(val, cloner));
         }
         return new DataArray(copiedList);
     }

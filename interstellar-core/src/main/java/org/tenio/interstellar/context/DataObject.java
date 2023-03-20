@@ -5,6 +5,7 @@ import org.tenio.interstellar.lang.Copyable;
 
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -408,6 +409,10 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
 
     @Override
     public DataObject copy() {
+        return copy(Utils.DEFAULT_CLONER);
+    }
+
+    public DataObject copy(Function<Object, ?> cloner) {
         Map<String, Object> copiedMap;
         if (map instanceof LinkedHashMap) {
             copiedMap = new LinkedHashMap<>(map.size());
@@ -415,7 +420,7 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
             copiedMap = new HashMap<>(map.size());
         }
         for (Map.Entry<String, Object> entry : map.entrySet()) {
-            Object val = Utils.checkAndCopy(entry.getValue());
+            Object val = Utils.checkAndCopy(entry.getValue(), cloner);
             copiedMap.put(entry.getKey(), val);
         }
         return new DataObject(copiedMap);
