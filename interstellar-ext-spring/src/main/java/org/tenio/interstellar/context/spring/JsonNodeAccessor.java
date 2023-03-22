@@ -142,7 +142,7 @@ public class JsonNodeAccessor implements PropertyAccessor {
         }
     }
 
-    interface JsonNodeWrapper<T> extends Comparable<T> {
+    public interface JsonNodeWrapper<T> extends Comparable<T> {
 
         String toString();
 
