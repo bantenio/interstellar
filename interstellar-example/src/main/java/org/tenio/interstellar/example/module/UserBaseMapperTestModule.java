@@ -7,7 +7,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.tenio.interstellar.example.panda.dao.UserBaseDao;
 
-@Component
 public class UserBaseMapperTestModule implements ApplicationRunner {
     private static final Logger log = LoggerFactory.getLogger(UserBaseMapperTestModule.class);
     private final UserBaseDao userBaseMapper;

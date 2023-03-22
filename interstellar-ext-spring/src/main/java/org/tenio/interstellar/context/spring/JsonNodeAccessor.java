@@ -1,14 +1,9 @@
 package org.tenio.interstellar.context.spring;
 
-import java.io.IOException;
-import java.util.AbstractList;
-import java.util.Iterator;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-
 import org.springframework.expression.AccessException;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.PropertyAccessor;
@@ -16,6 +11,10 @@ import org.springframework.expression.TypedValue;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.tenio.interstellar.jackson.ObjectMapperFactory;
+
+import java.io.IOException;
+import java.util.AbstractList;
+import java.util.Iterator;
 
 public class JsonNodeAccessor implements PropertyAccessor {
     private static final Class<?>[] SUPPORTED_CLASSES =

@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
 import static org.tenio.interstellar.jackson.ObjectMapperFactory.COMMON_OBJECT_MAPPER_BUILDER;
+import static org.tenio.interstellar.jackson.ObjectMapperFactory.IGNORE_NULL_OBJECT_MAPPER_BUILDER;
 
 /**
  * @author sunkaihan
@@ -21,9 +22,11 @@ import static org.tenio.interstellar.jackson.ObjectMapperFactory.COMMON_OBJECT_M
 public class JsonUtils {
 
     private static final Map<String, ObjectMapper> objectMapperCache = new ConcurrentHashMap<>();
-    private static final String COMMON_OBJECT_MAPPER = COMMON_OBJECT_MAPPER_BUILDER;
+    public static final String COMMON_OBJECT_MAPPER = COMMON_OBJECT_MAPPER_BUILDER;
+    public static final String IGNORE_NULL_OBJECT_MAPPER = IGNORE_NULL_OBJECT_MAPPER_BUILDER;
 
-    private static ObjectMapper getOrCreate(String key, Function<String, ObjectMapper> objectMapperFunction) {
+
+    public static ObjectMapper getOrCreate(String key, Function<String, ObjectMapper> objectMapperFunction) {
         return objectMapperCache.computeIfAbsent(key, objectMapperFunction);
     }
 
@@ -114,5 +117,13 @@ public class JsonUtils {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public static <T> T mapTo(Map from, Class<T> clazz) {
+        return getOrCreate(COMMON_OBJECT_MAPPER).convertValue(from, clazz);
+    }
+
+    public static Map<String, Object> mapFrom(Object from) {
+        return getOrCreate(COMMON_OBJECT_MAPPER).convertValue(from, MAP_STRING_OBJECT_TYPE_REFERENCE);
     }
 }

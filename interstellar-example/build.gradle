@@ -4,8 +4,10 @@ plugins {
 
 dependencies {
     implementation project(":${project_root_name}-${sub_ext_mybatis}")
+    implementation project(":${project_root_name}-${sub_ext_spring}")
     implementation group: 'org.slf4j', name: 'jul-to-slf4j', version: "${Slf4jVersion}"
     implementation group: 'cn.hutool', name: 'hutool-core', version: "${HutoolVersion}"
     implementation group: 'mysql', name: 'mysql-connector-java', version: "${MysqlVersion}"
     implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: "${MybatisSpringVersion}"
+    implementation group: 'org.apache.groovy', name: 'groovy', version: "$GroovyVersion"
 }

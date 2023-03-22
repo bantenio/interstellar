@@ -129,6 +129,10 @@ public class ObjectMapperFactory {
     }
 
     public static ObjectMapper objectMapper() {
+        return commonObjectMapper();
+    }
+
+    public static ObjectMapper commonObjectMapper() {
         return objectMapper(COMMON_OBJECT_MAPPER_BUILDER);
     }
 
