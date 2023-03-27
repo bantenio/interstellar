@@ -22,7 +22,6 @@ import org.tenio.interstellar.toolkit.JsonUtils;
 
 import java.util.Map;
 
-@Component
 public class JsonNodeAccessorTestModule implements ApplicationRunner, ApplicationContextAware {
     private static final MapAccessor MAP_ACCESSOR = new MapAccessor();
     private static final EnvironmentAccessor ENVIRONMENT_ACCESSOR = new EnvironmentAccessor();
