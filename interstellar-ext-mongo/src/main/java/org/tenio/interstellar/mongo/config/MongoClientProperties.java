@@ -1,6 +1,8 @@
 package org.tenio.interstellar.mongo.config;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MongoClientProperties {
 
@@ -41,6 +43,8 @@ public class MongoClientProperties {
     private String readConcernLevel;
 
     private Boolean useObjectId;
+
+    private Set<String> supportPojoPackages = new HashSet<>();
 
     public String getUsername() {
         return username;
@@ -213,6 +217,15 @@ public class MongoClientProperties {
         return this;
     }
 
+    public Set<String> getSupportPojoPackages() {
+        return supportPojoPackages;
+    }
+
+    public MongoClientProperties setSupportPojoPackages(Set<String> supportPojoPackages) {
+        this.supportPojoPackages = supportPojoPackages;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "MongoClientProperties{" +
@@ -235,6 +248,7 @@ public class MongoClientProperties {
                 ", streamType='" + streamType + '\'' +
                 ", readConcernLevel='" + readConcernLevel + '\'' +
                 ", useObjectId=" + useObjectId +
+                ", supportPojoPackages=" + supportPojoPackages +
                 '}';
     }
 

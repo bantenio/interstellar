@@ -4,8 +4,10 @@ import cn.hutool.core.util.ObjectUtil;
 import com.mongodb.*;
 import com.mongodb.connection.*;
 import org.bson.codecs.*;
+import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
 import org.tenio.interstellar.context.mongo.DataObjectCodec;
 import org.tenio.interstellar.mongo.config.parser.*;
 
@@ -21,9 +23,16 @@ public class MongoClientOptionsParser {
 
     public MongoClientOptionsParser(MongoClientProperties config) {
         Objects.requireNonNull(config);
-
         MongoClientSettings.Builder options = MongoClientSettings.builder();
-        options.codecRegistry(CodecRegistries.fromRegistries(commonCodecRegistry, CodecRegistries.fromCodecs(new DataObjectCodec(ObjectUtil.defaultIfNull(config.getUseObjectId(), false)))));
+        CodecProvider pojoCodecProvider = PojoCodecProvider
+                .builder()
+                .automatic(true)
+                .register(config.getSupportPojoPackages().toArray(String[]::new))
+                .build();
+        options.codecRegistry(CodecRegistries.fromRegistries(
+                MongoClientSettings.getDefaultCodecRegistry(),
+                CodecRegistries.fromProviders(pojoCodecProvider),
+                CodecRegistries.fromCodecs(new DataObjectCodec(ObjectUtil.defaultIfNull(config.getUseObjectId(), false)))));
 
         // All parsers should support connection_string first
         String cs = config.getConnectionString();
