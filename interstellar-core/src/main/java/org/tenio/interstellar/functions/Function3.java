@@ -1,9 +1,11 @@
 package org.tenio.interstellar.functions;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.function.Function;
 
-public interface Function3<P1, P2, P3, R> {
+@FunctionalInterface
+public interface Function3<P1, P2, P3, R> extends Serializable {
     R apply(P1 p1, P2 p2, P3 p3);
 
     default <V> Function3<P1, P2, P3, V> andThen(Function<? super R, ? extends V> after) {

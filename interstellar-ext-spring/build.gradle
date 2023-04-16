@@ -5,5 +5,5 @@ plugins {
 
 dependencies {
     api project(":${project_root_name}-${sub_ext_jackson}")
-    compileOnlyApi group: 'org.springframework', name: 'spring-expression', version: "${SpringVersion}"
+    api group: 'org.springframework', name: 'spring-expression', version: "${SpringVersion}"
 }

@@ -6,5 +6,5 @@ plugins {
 dependencies {
     api project(":${project_root_name}-${sub_core}")
 
-    compileOnlyApi group: 'io.projectreactor', name: 'reactor-core', version: "${ReactorVersion}"
+    api group: 'io.projectreactor', name: 'reactor-core', version: "${ReactorVersion}"
 }

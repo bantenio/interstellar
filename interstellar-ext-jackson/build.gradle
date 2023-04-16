@@ -4,7 +4,7 @@ plugins {
 
 dependencies {
     api project(":${project_root_name}-${sub_core}")
-    compileOnlyApi group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${JacksonVersion}"
-    compileOnlyApi group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: "${JacksonVersion}"
-    compileOnlyApi group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: "${JacksonVersion}"
+    api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "${JacksonVersion}"
+    api group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: "${JacksonVersion}"
+    api group: 'com.fasterxml.jackson.module', name: 'jackson-module-parameter-names', version: "${JacksonVersion}"
 }
