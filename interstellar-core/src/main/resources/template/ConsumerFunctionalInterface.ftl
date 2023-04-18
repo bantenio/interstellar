@@ -1,6 +1,7 @@
 package org.tenio.interstellar.functions;
 
 import java.util.Objects;
+import java.io.Serializable;
 
 @FunctionalInterface
 public interface Consumer${size}<<#list 1..size as idx>P${idx}<#if idx_has_next>, </#if></#list>> extends Serializable {
@@ -15,17 +16,7 @@ public interface Consumer${size}<<#list 1..size as idx>P${idx}<#if idx_has_next>
         };
     }
 
-
-    public static <<#list 1..size as idx>P${idx}<#if idx_has_next>, </#if></#list>> Mono<Void> c${size}(<#list 1..size as idx>P${idx} p${idx}<#if idx_has_next>, </#if></#list>, Consumer${size}<<#list 1..size as idx>P${idx}<#if idx_has_next>, </#if></#list>> consumer) {
-        return c${size}(<#list 1..size as idx>p${idx}<#if idx_has_next>, </#if></#list>, consumer, null);
-    }
-
-
-    public static <<#list 1..size as idx>P${idx}<#if idx_has_next>, </#if></#list>> Mono<Void> c${size}(<#list 1..size as idx>P${idx} p${idx}<#if idx_has_next>, </#if></#list>, Consumer${size}<<#list 1..size as idx>P${idx}<#if idx_has_next>, </#if></#list>> consumer, Scheduler scheduler) {
-        Mono<Void> task = Mono.fromRunnable(() -> consumer.accept(<#list 1..size as idx>p${idx}<#if idx_has_next>, </#if></#list>));
-        if (scheduler != null) {
-            task.publishOn(scheduler);
-        }
-        return task;
+    default void invoke(Object[] args) {
+        accept(<#list 1..size as idx>(P${idx}) args[${idx - 1}]<#if idx_has_next>, </#if></#list>);
     }
 }

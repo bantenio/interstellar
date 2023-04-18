@@ -1,7 +1,6 @@
 package org.tenio.interstellar;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.io.IoUtil;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -25,8 +24,8 @@ public class Main {
         cfg.setTemplateLoader(classTemplateLoader);
         Template template;
 
-//        template = cfg.getTemplate("ConsumerFunctionalInterface.ftl");
-//        generateConsumer(template);
+        template = cfg.getTemplate("ConsumerFunctionalInterface.ftl");
+        generateConsumer(template);
 
         template = cfg.getTemplate("FunctionFunctionalInterface.ftl");
         generateFunction(template);
@@ -35,7 +34,7 @@ public class Main {
     public static void generateConsumer(Template template) throws TemplateException, IOException {
         StringWriter stringWriter = null;
         Map<String, Object> data = new LinkedHashMap<>();
-        for (int idx = 6; idx < 13; idx++) {
+        for (int idx = 1; idx < 13; idx++) {
             data.put("size", idx);
             stringWriter = new StringWriter();
             template.process(data, stringWriter);
@@ -46,7 +45,7 @@ public class Main {
     public static void generateFunction(Template template) throws TemplateException, IOException {
         StringWriter stringWriter = null;
         Map<String, Object> data = new LinkedHashMap<>();
-        for (int idx = 6; idx < 13; idx++) {
+        for (int idx = 1; idx < 13; idx++) {
             data.put("size", idx);
             stringWriter = new StringWriter();
             template.process(data, stringWriter);
