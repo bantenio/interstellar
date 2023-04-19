@@ -12,15 +12,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class Main {
+public class Tools {
     private static final Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
 
     static {
         cfg.setCacheStorage(new freemarker.cache.MruCacheStorage(20, 250));
     }
 
-    public static void main(String[] args) throws IOException, TemplateException {
-        ClassTemplateLoader classTemplateLoader = new ClassTemplateLoader(Main.class, "/template/");
+    public static void main(String[] args) throws Throwable {
+        generateFunctionalInterfaces();
+    }
+
+    public static void generateFunctionalInterfaces() throws IOException, TemplateException {
+        ClassTemplateLoader classTemplateLoader = new ClassTemplateLoader(Tools.class, "/template/");
         cfg.setTemplateLoader(classTemplateLoader);
         Template template;
 

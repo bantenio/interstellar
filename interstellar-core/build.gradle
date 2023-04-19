@@ -9,5 +9,4 @@ dependencies {
     api group: 'cn.hutool', name: 'hutool-core', version: "${HutoolVersion}"
     api group: 'cn.hutool', name: 'hutool-cache', version: "${HutoolVersion}"
     api group: 'org.apache.commons', name: 'commons-collections4', version: "${CommonsCollections4}"
-    implementation group: 'org.freemarker', name: 'freemarker', version: "${FreemarkerVersion}"
 }

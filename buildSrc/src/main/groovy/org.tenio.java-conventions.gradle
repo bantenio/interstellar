@@ -25,7 +25,11 @@ ext {
 
 group = "org.tenio.${project_root_name}"
 version = "${version}"
-java.sourceCompatibility = JavaVersion.VERSION_17
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 java {
     withSourcesJar()

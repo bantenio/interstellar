@@ -11,4 +11,5 @@ dependencies {
     implementation group: 'mysql', name: 'mysql-connector-java', version: "${MysqlVersion}"
     implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: "${MybatisSpringVersion}"
     implementation group: 'org.apache.groovy', name: 'groovy', version: "$GroovyVersion"
+    implementation group: 'org.freemarker', name: 'freemarker', version: "${FreemarkerVersion}"
 }
