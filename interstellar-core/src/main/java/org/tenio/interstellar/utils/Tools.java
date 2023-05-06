@@ -240,4 +240,32 @@ public class Tools {
         return content;
     }
 
+    public static String buildCharTable(int length, char[]... nums) {
+        StringBuilder buf = new StringBuilder();
+        int totalLength = 0;
+        BitSet bitSet = new BitSet();
+        int[] limit = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            totalLength += nums[i].length;
+            limit[i] = totalLength;
+        }
+        int numIndex, index;
+        for (int i = 0; i < length; i++) {
+            numIndex = (int) (Math.random() * totalLength);
+            if (bitSet.get(numIndex)) {
+                i--;
+                continue;
+            }
+            bitSet.set(numIndex);
+            index = numIndex;
+            for (int j = 0; j < limit.length; j++) {
+                if (numIndex < limit[j]) {
+                    buf.append(nums[j][index]);
+                    break;
+                }
+                index = numIndex - limit[j];
+            }
+        }
+        return buf.toString();
+    }
 }

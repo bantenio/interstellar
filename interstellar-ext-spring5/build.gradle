@@ -1,0 +1,8 @@
+plugins {
+    id 'org.tenio.java-conventions'
+}
+
+dependencies {
+    api project(":${project_root_name}-${sub_ext_jackson}")
+    api group: 'org.springframework', name: 'spring-expression', version: "${Spring5Version}"
+}

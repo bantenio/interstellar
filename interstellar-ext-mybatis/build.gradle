@@ -7,4 +7,5 @@ dependencies {
     api project(":${project_root_name}-${sub_core}")
 
     api group: 'org.mybatis', name: 'mybatis', version: "${MybatisVersion}"
+    compileOnly group: 'org.freemarker', name: 'freemarker', version: "${FreemarkerVersion}"
 }

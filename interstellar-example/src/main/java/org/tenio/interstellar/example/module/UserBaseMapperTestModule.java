@@ -4,14 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.stereotype.Component;
-import org.tenio.interstellar.example.panda.dao.UserBaseDao;
+import org.tenio.interstellar.example.panda.dao.UserBaseDataObjectDao;
 
 public class UserBaseMapperTestModule implements ApplicationRunner {
     private static final Logger log = LoggerFactory.getLogger(UserBaseMapperTestModule.class);
-    private final UserBaseDao userBaseMapper;
+    private final UserBaseDataObjectDao userBaseMapper;
 
-    public UserBaseMapperTestModule(UserBaseDao userBaseMapper) {
+    public UserBaseMapperTestModule(UserBaseDataObjectDao userBaseMapper) {
         this.userBaseMapper = userBaseMapper;
     }
 

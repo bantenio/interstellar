@@ -15,8 +15,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class BaseProviderMethodResolver implements ProviderMethodResolver {
-    private static final Logger log = LoggerFactory.getLogger(BaseProviderMethodResolver.class);
+public class DataObjectProviderMethodResolver implements ProviderMethodResolver {
+    private static final Logger log = LoggerFactory.getLogger(DataObjectProviderMethodResolver.class);
     private static final Map<Class<?>, String> TYPE_TABLE_NAME_MAPPING = new ConcurrentHashMap<>();
 
     // region helper functions

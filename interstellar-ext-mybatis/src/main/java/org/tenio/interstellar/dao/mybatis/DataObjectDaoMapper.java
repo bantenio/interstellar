@@ -10,63 +10,63 @@ import org.tenio.interstellar.dao.Dao;
 
 import java.util.List;
 
-public interface DaoMapper<T> extends Dao {
+public interface DataObjectDaoMapper<T> extends Dao {
 
-    @InsertProvider(BaseProviderMethodResolver.class)
+    @InsertProvider(DataObjectProviderMethodResolver.class)
     void save(DataObject data);
 
-    @InsertProvider(BaseProviderMethodResolver.class)
+    @InsertProvider(DataObjectProviderMethodResolver.class)
     void saveAll(DataArray datas);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     DataObject one(DataObject condition);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     DataObject oneWithFields(DataObject condition, DataObject fields);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     DataObject byId(Object id);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     DataObject byIdWithFields(Object id, DataObject fields);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> inIdsWithList(List<?> ids);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> inIdsWithDataArray(DataArray ids);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> inIdsWithListSort(List<?> ids, DataObject sort);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> inIdsWithDataArraySort(DataArray ids, DataObject sort);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> all();
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> allWithSort(DataObject sort);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> find(DataObject condition);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> findWithSort(DataObject condition, DataObject sort);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> findWithPage(DataObject condition, int current, int size);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> findWithPageSort(DataObject condition, int current, int size, DataObject sort);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     List<DataObject> findScroll(DataObject condition, int startIndex, int size, DataObject sort);
 
-    @SelectProvider(BaseProviderMethodResolver.class)
+    @SelectProvider(DataObjectProviderMethodResolver.class)
     Long count(DataObject conditionFields);
 
-    @UpdateProvider(BaseProviderMethodResolver.class)
+    @UpdateProvider(DataObjectProviderMethodResolver.class)
     void update(DataObject condition, DataObject setFields);
 
     @Override
@@ -79,22 +79,22 @@ public interface DaoMapper<T> extends Dao {
         throw new UnsupportedOperationException();
     }
 
-    @UpdateProvider(BaseProviderMethodResolver.class)
+    @UpdateProvider(DataObjectProviderMethodResolver.class)
     void updateByEntityId(DataObject entity);
 
-    @UpdateProvider(BaseProviderMethodResolver.class)
+    @UpdateProvider(DataObjectProviderMethodResolver.class)
     void updateById(Object id, DataObject entity);
 
-    @DeleteProvider(BaseProviderMethodResolver.class)
+    @DeleteProvider(DataObjectProviderMethodResolver.class)
     void remove(DataObject condition);
 
-    @DeleteProvider(BaseProviderMethodResolver.class)
+    @DeleteProvider(DataObjectProviderMethodResolver.class)
     void removeByEntityId(DataObject entity);
 
-    @DeleteProvider(BaseProviderMethodResolver.class)
+    @DeleteProvider(DataObjectProviderMethodResolver.class)
     void removeById(Object id);
 
-    @DeleteProvider(BaseProviderMethodResolver.class)
+    @DeleteProvider(DataObjectProviderMethodResolver.class)
     void removeByIds(DataArray ids);
 
     @Override
