@@ -8,59 +8,144 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
-
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class BufferImpl implements Buffer {
-
+    /**
+     *
+     * TODO
+     *
+     * @param initialSizeHint TODO
+     * @return TODO
+     */
     public static Buffer buffer(int initialSizeHint) {
         return new BufferImpl(initialSizeHint);
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @return TODO
+     */
     public static Buffer buffer() {
         return new BufferImpl();
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param str TODO
+     * @return TODO
+     */
     public static Buffer buffer(String str) {
         return new BufferImpl(str);
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param str TODO
+     * @param enc TODO
+     * @return TODO
+     */
     public static Buffer buffer(String str, String enc) {
         return new BufferImpl(str, enc);
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param bytes TODO
+     * @return TODO
+     */
     public static Buffer buffer(byte[] bytes) {
         return new BufferImpl(bytes);
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param byteBuffer TODO
+     * @return TODO
+     */
     public static Buffer buffer(ByteBuf byteBuffer) {
         return new BufferImpl(byteBuffer);
     }
 
     private ByteBuf buffer;
 
+    /**
+     *
+     */
     public BufferImpl() {
         this(0);
     }
 
+    /**
+     *
+     * @param initialSizeHint TODO
+     */
     BufferImpl(int initialSizeHint) {
         buffer = HeapByteBufAllocator.DEFAULT.heapBuffer(initialSizeHint, Integer.MAX_VALUE);
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param bytes TODO
+     */
     BufferImpl(byte[] bytes) {
         buffer = HeapByteBufAllocator.DEFAULT.heapBuffer(bytes.length, Integer.MAX_VALUE).writeBytes(bytes);
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param str TODO
+     * @param enc TODO
+     */
     BufferImpl(String str, String enc) {
         this(str.getBytes(Charset.forName(Objects.requireNonNull(enc))));
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param str TODO
+     * @param cs TODO
+     */
     BufferImpl(String str, Charset cs) {
         this(str.getBytes(cs));
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param str TODO
+     */
     BufferImpl(String str) {
         this(str, StandardCharsets.UTF_8);
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param buffer TODO
+     */
     BufferImpl(ByteBuf buffer) {
         this.buffer = buffer;
     }
@@ -523,7 +608,10 @@ public class BufferImpl implements Buffer {
     }
 
     /**
-     * Ensure buffer length is at least the provided {@code newLength}.
+     *
+     * TODO
+     *
+     * @param h TODO
      */
     private void ensureLength(int newLength) {
         int capacity = buffer.capacity();
@@ -546,7 +634,10 @@ public class BufferImpl implements Buffer {
     }
 
     /**
-     * Make sure that the underlying buffer can be expanded by {@code amount} bytes.
+     *
+     * TODO
+     *
+     * @param t TODO
      */
     private void ensureExpandableBy(int amount) {
         int minMaxCapa = buffer.writerIndex() + amount;
@@ -578,11 +669,23 @@ public class BufferImpl implements Buffer {
         return buffer != null ? buffer.hashCode() : 0;
     }
 
+    /**
+     * TODO
+     *
+     * @param buff TODO
+     */
     public void writeToBuffer(Buffer buff) {
         buff.appendInt(this.length());
         buff.appendBuffer(this);
     }
 
+    /**
+     * TODO
+     *
+     * @param pos    TODO
+     * @param buffer TODO
+     * @return TODO
+     */
     public int readFromBuffer(int pos, Buffer buffer) {
         int len = buffer.getInt(pos);
         BufferImpl impl = (BufferImpl) buffer.getBuffer(pos + 4, pos + 4 + len);

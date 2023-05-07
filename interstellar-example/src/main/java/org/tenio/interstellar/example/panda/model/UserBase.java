@@ -439,7 +439,8 @@ public class UserBase {
 
     /**
      * ???????
-     * @param bizType
+     *
+     * @param bizType TODO
      */
     public void setBizType(String bizType) {
         this.bizType = bizType == null ? null : bizType.trim();

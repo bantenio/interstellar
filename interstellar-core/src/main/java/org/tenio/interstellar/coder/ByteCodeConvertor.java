@@ -2,9 +2,21 @@ package org.tenio.interstellar.coder;
 
 import cn.hutool.core.util.PrimitiveArrayUtil;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class ByteCodeConvertor implements CodeConvertor {
     private final char[] table;
 
+    /**
+     *
+     * TODO
+     *
+     * @param table TODO
+     */
     public ByteCodeConvertor(String table) {
         this.table = table.toCharArray();
     }

@@ -3,10 +3,33 @@ package org.tenio.interstellar.functions;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ *
+ * @param <P1> TODO
+ * @param <P2> TODO
+ */
 @FunctionalInterface
 public interface Consumer2<P1, P2> extends Serializable, Invoker {
+    /**
+     *
+     * TODO
+     *
+     * @param p1 TODO
+     * @param p2 TODO
+     */
     void accept(P1 p1, P2 p2);
 
+    /**
+     *
+     * TODO
+     *
+     * @param after TODO
+     * @return TODO
+     */
     default Consumer2<P1, P2> andThen(Consumer2<? super P1, ? super P2> after) {
         Objects.requireNonNull(after);
 

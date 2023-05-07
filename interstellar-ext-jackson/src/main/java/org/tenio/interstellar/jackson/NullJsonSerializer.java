@@ -7,8 +7,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 
 /**
- * @author sunkaihan
- * @date 2022-04-26
+ * &#064;author sunkaihan
  */
 public class NullJsonSerializer extends JsonSerializer<Object> {
     @Override

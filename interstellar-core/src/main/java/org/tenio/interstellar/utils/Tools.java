@@ -11,8 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
- * @author sunkaihan
- * @date 2022-04-18
+ * &#064;author sunkaihan
  */
 public class Tools {
     private static final Logger log = LoggerFactory.getLogger(Tools.class);
@@ -94,7 +93,7 @@ public class Tools {
     /**
      * Get n hour zero h/m/s timestamp
      *
-     * @param hourAmount
+     * @param hourAmount TODO
      * @return second
      */
     public static int getHoursZeroTs(int hourAmount) {
@@ -115,7 +114,7 @@ public class Tools {
     /**
      * Get n day zero h/m/s timestamp
      *
-     * @param dayAmount
+     * @param dayAmount TODO
      * @return second
      */
     public static int getDaysZeroTs(int dayAmount) {
@@ -131,7 +130,7 @@ public class Tools {
     /**
      * Get n day 23hour h/m/s timestamp
      *
-     * @param dayAmount
+     * @param dayAmount TODO
      * @return second
      */
     public static int getDays23HourTs(int dayAmount) {
@@ -157,7 +156,7 @@ public class Tools {
     /**
      * Get n month zero h/m/s timestamp
      *
-     * @param monthAmount
+     * @param monthAmount TODO
      * @return month
      */
     public static int getMonthsZeroTs(int monthAmount) {

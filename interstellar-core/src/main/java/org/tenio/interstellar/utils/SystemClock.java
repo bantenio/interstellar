@@ -4,8 +4,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
 /**
- * @author sunkaihan
- * @date 2022-04-18
+ * &#064;author sunkaihan
  */
 public class SystemClock {
 

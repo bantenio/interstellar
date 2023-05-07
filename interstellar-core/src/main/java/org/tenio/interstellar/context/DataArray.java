@@ -11,8 +11,7 @@ import java.util.stream.Stream;
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 
 /**
- * @author sunkaihan
- * @date 2022-04-18
+ * &#064;author sunkaihan
  */
 public class DataArray implements Iterable<Object>, Copyable {
     private List<Object> list;

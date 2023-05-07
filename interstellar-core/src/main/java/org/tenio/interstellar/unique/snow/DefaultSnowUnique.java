@@ -12,8 +12,7 @@ import java.net.NetworkInterface;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * @author sunkaihan
- * @date 2022-04-18
+ * &#064;author sunkaihan
  */
 public class DefaultSnowUnique implements ISnowUnique {
     private static final Logger log = LoggerFactory.getLogger(DefaultSnowUnique.class);
@@ -127,7 +126,7 @@ public class DefaultSnowUnique implements ISnowUnique {
     /**
      * 获取下一个ID
      *
-     * @return
+     * @return TODO
      */
     public synchronized long nextId() {
         long timestamp = timeGen();

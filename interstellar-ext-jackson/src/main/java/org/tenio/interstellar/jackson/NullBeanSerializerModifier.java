@@ -9,8 +9,7 @@ import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import java.util.List;
 import java.util.Set;
 /**
- * @author sunkaihan
- * @date 2022-04-26
+ * &#064;author sunkaihan
  */
 public class NullBeanSerializerModifier extends BeanSerializerModifier {
     @Override

@@ -3,10 +3,24 @@ package org.tenio.interstellar.lang;
 import java.util.function.Function;
 
 /**
- * @author sunkaihan
- * @date 2022-04-18
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
  */
 public interface Copyable {
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     Copyable copy();
+
+    /**
+     * TODO
+     *
+     * @param cloner TODO
+     * @return TODO
+     */
     Copyable copy(Function<Object, ?> cloner);
 }

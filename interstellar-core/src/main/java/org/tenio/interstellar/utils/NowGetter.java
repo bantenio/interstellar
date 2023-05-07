@@ -5,14 +5,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * @author sunkaihan
- * @date 2022-04-24
+ * &#064;author sunkaihan
  */
 public interface NowGetter {
     /**
      * 获取时间间隔单位
      *
-     * @return
+     * @return TODO
      */
     TimeUnit getTimeUnit();
 

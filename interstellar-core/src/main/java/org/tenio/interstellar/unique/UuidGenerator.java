@@ -3,8 +3,7 @@ package org.tenio.interstellar.unique;
 import java.util.UUID;
 
 /**
- * @author sunkaihan
- * @date 2022-04-18
+ * &#064;author sunkaihan
  */
 public class UuidGenerator implements IUniqueGenerator {
     public static String[] chars = new String[]{"a", "b", "c", "d", "e", "f",

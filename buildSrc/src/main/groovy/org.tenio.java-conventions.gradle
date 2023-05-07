@@ -10,6 +10,7 @@ import java.nio.file.Paths
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id 'signing'
 }
 
 repositories {
@@ -23,16 +24,25 @@ ext {
     project_name = "${project.name.replace('interstellar-', '')}"
 }
 
-group = "org.tenio.${project_root_name}"
+group = "io.github.bantenio.${project_root_name}"
 version = "${version}"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+    withSourcesJar()
+    withJavadocJar()
 }
 
-java {
-    withSourcesJar()
+javadoc {
+    options {
+        encoding('UTF-8')
+        version
+        author
+    }
+    if (JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
 }
 
 description = "${project_root_name}-${project_name}"
@@ -46,35 +56,70 @@ if (Files.exists(Paths.get("$project.rootDir/maven_cert.properties"))) {
     localProperties.load(new FileInputStream("$project.rootDir/maven_cert.properties"))
     localProperties.each { prop -> project.ext.set(prop.key, prop.value) }
 } else {
-    localProperties.setProperty("zz_maven_repository_username", "nothing")
-    localProperties.setProperty("zz_maven_repository_password", "nothing")
+    localProperties.setProperty("center_maven_repository_username", "nothing")
+    localProperties.setProperty("center_maven_repository_password", "nothing")
+    localProperties.setProperty("signing.keyId", "nothing")
+    localProperties.setProperty("signing.password", "nothing")
+    localProperties.setProperty("igning.secretKeyRingFile", "nothing")
 }
 
 ext {
-    zz_maven_repository_username = localProperties.getProperty("zz_maven_repository_username")
-    zz_maven_repository_password = localProperties.getProperty("zz_maven_repository_password")
+    center_maven_repository_username = localProperties.getProperty("center_maven_repository_username")
+    center_maven_repository_password = localProperties.getProperty("center_maven_repository_password")
+    signingKeyId = localProperties.getProperty("signing.keyId")
+    signingPassword = localProperties.getProperty("signing.password")
+    signingGpgKeyFile = localProperties.getProperty("signing.secretKeyRingFile")
+    signingGpgKey = ''
+    if (Files.exists(Paths.get("$project.rootDir/$signingGpgKeyFile"))) {
+        signingGpgKey = new File(signingGpgKeyFile).text
+    }
 }
 
 publishing {
     repositories {
         maven {
-            allowInsecureProtocol = true
-            name "zzMaven"
-            url = version.endsWith('SNAPSHOT') ? "${zzMavenSnapshotsUrl}" : "${zzMavenReleaseUrl}"
-
+            url = version.endsWith('SNAPSHOT') ? "$centerMavenSnapshotsUrl" : "$centerMavenReleasesUrl"
             credentials {
-                username "${zz_maven_repository_username}"
-                password "${zz_maven_repository_password}"
+                username "${center_maven_repository_username}"
+                password "${center_maven_repository_password}"
             }
         }
     }
     publications {
-        maven(MavenPublication) {
-            from(components.java)
-            groupId = "${project_group}"
+        mavenJava(MavenPublication) {
             artifactId = "${project_root_name}-${project_name}"
+            description = "${project.description}"
+            from components.java
+            groupId = "${project_group}"
+            pom {
+                name = "${project_root_name}-${project_name}"
+                url = "${project_url}"
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://www.opensource.org/licenses/mit-license.php'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'bantenio'
+                        name = 'Sun Kaihan'
+                        email = 'bantenio@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git@github.com:bantenio/interstellar.git'
+                    developerConnection = 'scm:git:git@github.com:bantenio/interstellar.git'
+                    url = "${project_url}"
+                }
+            }
         }
     }
+}
+
+signing {
+    useInMemoryPgpKeys(signingKeyId, signingGpgKey, signingPassword)
+    sign publishing.publications.mavenJava
 }
 
 tasks.withType(JavaCompile) {

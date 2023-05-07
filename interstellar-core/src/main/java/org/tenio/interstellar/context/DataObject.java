@@ -12,8 +12,7 @@ import java.util.stream.StreamSupport;
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 
 /**
- * @author sunkaihan
- * @date 2022-04-18
+ * &#064;author sunkaihan
  */
 public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable {
 

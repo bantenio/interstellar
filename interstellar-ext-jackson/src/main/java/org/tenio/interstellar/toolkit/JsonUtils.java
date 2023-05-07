@@ -16,8 +16,7 @@ import static org.tenio.interstellar.jackson.ObjectMapperFactory.COMMON_OBJECT_M
 import static org.tenio.interstellar.jackson.ObjectMapperFactory.IGNORE_NULL_OBJECT_MAPPER_BUILDER;
 
 /**
- * @author sunkaihan
- * @date 2022-04-26
+ * &#064;author sunkaihan
  */
 public class JsonUtils {
 

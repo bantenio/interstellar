@@ -119,7 +119,7 @@ public class PrivateKeyParser {
      * <p/>There are many DER decoders in JRE but using them will tie this
      * program to a specific JCE/JVM.
      *
-     * @author zhang
+     * &#064;author zhang
      */
     static class DerParser {
 
@@ -256,8 +256,8 @@ public class PrivateKeyParser {
     /**
      * An ASN.1 TLV. The object is not parsed. It can
      * only handle integers and strings.
-     *
-     * @author zhang
+     * <p>
+     * &#064;author zhang
      */
     static class Asn1Object {
 
