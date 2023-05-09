@@ -6,9 +6,22 @@ import org.tenio.interstellar.mongo.config.MongoClientProperties;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class SocketSettingsParser {
     private final SocketSettings settings;
 
+    /**
+     *
+     * TODO
+     *
+     * @param connectionString TODO
+     * @param config TODO
+     */
     public SocketSettingsParser(ConnectionString connectionString, MongoClientProperties config) {
         SocketSettings.Builder settings = SocketSettings.builder();
         MongoClientProperties.SocketProperties socketProperties = config.getSocket();
@@ -36,6 +49,11 @@ public class SocketSettingsParser {
         this.settings = settings.build();
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public SocketSettings settings() {
         return settings;
     }

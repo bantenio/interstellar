@@ -16,6 +16,12 @@ import java.io.IOException;
 import java.util.AbstractList;
 import java.util.Iterator;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class JsonNodeAccessor implements PropertyAccessor {
     private static final Class<?>[] SUPPORTED_CLASSES =
             {
@@ -26,6 +32,11 @@ public class JsonNodeAccessor implements PropertyAccessor {
 
     private ObjectMapper objectMapper = ObjectMapperFactory.objectMapper();
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     */
     public void setObjectMapper(ObjectMapper objectMapper) {
         Assert.notNull(objectMapper, "'objectMapper' cannot be null");
         this.objectMapper = objectMapper;
@@ -129,6 +140,13 @@ public class JsonNodeAccessor implements PropertyAccessor {
         throw new IllegalArgumentException("Json is not ValueNode.");
     }
 
+    /**
+     * TODO
+     *
+     * @param json TODO
+     * @return TODO
+     * @throws AccessException TODO
+     */
     public static Object wrap(JsonNode json) throws AccessException {
         if (json == null) {
             return null;
@@ -141,10 +159,25 @@ public class JsonNodeAccessor implements PropertyAccessor {
         }
     }
 
+    /**
+     * TODO
+     * <p>
+     * &#064;author:     Ban Tenio
+     * &#064;version:    1.0
+     *
+     * @param <T> TODO
+     */
     public interface JsonNodeWrapper<T> extends Comparable<T> {
-
+        /**
+         * @return TODO
+         */
         String toString();
 
+        /**
+         * TODO
+         *
+         * @return TODO
+         */
         JsonNode getRealNode();
 
     }

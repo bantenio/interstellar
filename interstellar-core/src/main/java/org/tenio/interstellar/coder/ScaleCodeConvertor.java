@@ -1,5 +1,11 @@
 package org.tenio.interstellar.coder;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class ScaleCodeConvertor implements CodeConvertor {
 
     private char[] table;
@@ -8,6 +14,12 @@ public class ScaleCodeConvertor implements CodeConvertor {
 
     private int scale;
 
+    /**
+     *
+     * TODO
+     *
+     * @param tableString TODO
+     */
     public ScaleCodeConvertor(String tableString) {
         tableStr = tableString;
         table = tableString.toCharArray();

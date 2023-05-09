@@ -11,6 +11,12 @@ import java.time.Instant;
 
 import static org.tenio.interstellar.context.Utils.BASE64_DECODER;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class ByteArrayDeserializer extends JsonDeserializer<byte[]> {
 
     @Override

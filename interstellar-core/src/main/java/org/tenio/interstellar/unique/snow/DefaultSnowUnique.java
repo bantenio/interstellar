@@ -54,6 +54,9 @@ public class DefaultSnowUnique implements ISnowUnique {
      */
     private long lastTimestamp = -1L;
 
+    /**
+     * TODO
+     */
     public DefaultSnowUnique() {
         this.datacenterId = getDataCenterId(maxDatacenterId);
         this.workerId = getMaxWorkerId(datacenterId, maxWorkerId);
@@ -79,9 +82,12 @@ public class DefaultSnowUnique implements ISnowUnique {
     }
 
     /**
-     * <p>
-     * 获取 maxWorkerId
-     * </p>
+     *
+     * TODO
+     *
+     * @param dataCenterId TODO
+     * @param maxWorkerId TODO
+     * @return TODO
      */
     protected static long getMaxWorkerId(long dataCenterId, long maxWorkerId) {
         StringBuilder mpid = new StringBuilder();
@@ -100,9 +106,11 @@ public class DefaultSnowUnique implements ISnowUnique {
     }
 
     /**
-     * <p>
+     *
      * 数据标识id部分
-     * </p>
+     *
+     * @param maxDataCenterId TODO
+     * @return TODO
      */
     protected static long getDataCenterId(long maxDataCenterId) {
         long id = 0L;
@@ -169,6 +177,12 @@ public class DefaultSnowUnique implements ISnowUnique {
                 | sequence;
     }
 
+    /**
+     * TODO
+     *
+     * @param lastTimestamp TODO
+     * @return TODO
+     */
     protected long tilNextMillis(long lastTimestamp) {
         long timestamp = timeGen();
         while (timestamp <= lastTimestamp) {
@@ -177,6 +191,11 @@ public class DefaultSnowUnique implements ISnowUnique {
         return timestamp;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     protected long timeGen() {
         return SystemClock.nowMilli();
     }

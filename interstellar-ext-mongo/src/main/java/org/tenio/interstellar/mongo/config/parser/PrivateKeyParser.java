@@ -8,6 +8,12 @@ import java.math.BigInteger;
 import java.security.spec.RSAPrivateCrtKeySpec;
 import java.util.Arrays;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class PrivateKeyParser {
     private static final byte[] OID_RSA_PUBLIC_KEY = { 0x2A, (byte) 0x86, 0x48, (byte) 0x86, (byte) 0xF7, 0x0D, 0x01,
             0x01, 0x01 };
@@ -56,31 +62,11 @@ public class PrivateKeyParser {
     }
 
     /**
-     * Convert PKCS#1 encoded private key into RSAPrivateCrtKeySpec.
-     * <p/>
-     * <p/>The ASN.1 syntax for the private key with CRT is
-     * <p/>
-     * <pre>
-     * --
-     * -- Representation of RSA private key with information for the CRT algorithm.
-     * --
-     * RSAPrivateKey ::= SEQUENCE {
-     *   version           Version,
-     *   modulus           INTEGER,  -- n
-     *   publicExponent    INTEGER,  -- e
-     *   privateExponent   INTEGER,  -- d
-     *   prime1            INTEGER,  -- p
-     *   prime2            INTEGER,  -- q
-     *   exponent1         INTEGER,  -- d mod (p-1)
-     *   exponent2         INTEGER,  -- d mod (q-1)
-     *   coefficient       INTEGER,  -- (inverse of q) mod p
-     *   otherPrimeInfos   OtherPrimeInfos OPTIONAL
-     * }
-     * </pre>
+     * TODO
      *
      * @param keyBytes PKCS#1 encoded key
      * @return KeySpec
-     * @throws MongoException
+     * @throws MongoException TODO
      */
     public static RSAPrivateCrtKeySpec getRSAKeySpec(byte[] keyBytes) throws MongoException {
         DerParser parser = new DerParser(keyBytes);

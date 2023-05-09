@@ -10,6 +10,14 @@ import org.tenio.interstellar.dao.Dao;
 
 import java.util.List;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ *
+ * @param <T> TODO
+ */
 public interface DataObjectDaoMapper<T> extends Dao {
 
     @InsertProvider(DataObjectProviderMethodResolver.class)
@@ -79,6 +87,11 @@ public interface DataObjectDaoMapper<T> extends Dao {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * TODO
+     *
+     * @param entity TODO
+     */
     @UpdateProvider(DataObjectProviderMethodResolver.class)
     void updateByEntityId(DataObject entity);
 
@@ -88,6 +101,11 @@ public interface DataObjectDaoMapper<T> extends Dao {
     @DeleteProvider(DataObjectProviderMethodResolver.class)
     void remove(DataObject condition);
 
+    /**
+     * TODO
+     *
+     * @param entity TODO
+     */
     @DeleteProvider(DataObjectProviderMethodResolver.class)
     void removeByEntityId(DataObject entity);
 

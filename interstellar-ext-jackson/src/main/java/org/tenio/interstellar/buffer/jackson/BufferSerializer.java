@@ -8,6 +8,12 @@ import org.tenio.interstellar.context.Utils;
 
 import java.io.IOException;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class BufferSerializer extends JsonSerializer<Buffer> {
 
     @Override

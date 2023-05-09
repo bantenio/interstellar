@@ -7,15 +7,34 @@ import org.tenio.interstellar.mongo.config.MongoClientProperties;
 
 import java.util.Optional;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class ReadConcernLevelParser {
     private final ConnectionString connectionString;
     private final MongoClientProperties config;
 
+    /**
+     *
+     * TODO
+     *
+     * @param connectionString TODO
+     * @param config TODO
+     */
     public ReadConcernLevelParser(ConnectionString connectionString, MongoClientProperties config) {
         this.connectionString = connectionString;
         this.config = config;
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @return TODO
+     */
     public Optional<ReadConcern> readConcern() {
         return tryToParseFromConnectionString().map(this::lift).orElseGet(this::tryToParseFromConfig);
     }

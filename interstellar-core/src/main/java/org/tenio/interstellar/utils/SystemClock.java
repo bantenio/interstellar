@@ -24,6 +24,11 @@ public class SystemClock {
         scheduleClockUpdating();
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public static long nowMilli() {
         return InstanceHolder.MILLI_INSTANCE.getter.nowValue().longValue();
     }
@@ -32,6 +37,11 @@ public class SystemClock {
         return nowMilli();
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public static int nowSecond() {
         return InstanceHolder.SECOND_INSTANCE.getter.nowValue().intValue();
     }

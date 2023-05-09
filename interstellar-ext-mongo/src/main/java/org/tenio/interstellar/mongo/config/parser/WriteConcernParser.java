@@ -6,9 +6,22 @@ import org.tenio.interstellar.mongo.config.MongoClientProperties;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class WriteConcernParser {
     private final WriteConcern writeConcern;
 
+    /**
+     *
+     * TODO
+     *
+     * @param connectionString TODO
+     * @param config TODO
+     */
     public WriteConcernParser(ConnectionString connectionString, MongoClientProperties config) {
         WriteConcern connStringWriteConcern = null;
         if (connectionString != null) {
@@ -73,6 +86,11 @@ public class WriteConcernParser {
         return wc;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public WriteConcern writeConcern() {
         return writeConcern;
     }

@@ -7,13 +7,31 @@ import org.tenio.interstellar.mongo.config.MongoClientProperties;
 
 import java.util.Optional;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class StreamTypeParser {
     private final MongoClientProperties config;
 
+    /**
+     *
+     * TODO
+     *
+     * @param config TODO
+     */
     public StreamTypeParser(MongoClientProperties config) {
         this.config = config;
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @return TODO
+     */
     public Optional<StreamFactoryFactory> streamFactory() {
         return Optional.ofNullable(config.getStreamType())
                 .map(StreamType::parse)

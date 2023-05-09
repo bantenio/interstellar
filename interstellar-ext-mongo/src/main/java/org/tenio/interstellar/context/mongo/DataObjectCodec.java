@@ -19,22 +19,83 @@ import java.util.function.Consumer;
 
 import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
-public class DataObjectCodec  extends AbstractDataCodec<DataObject, DataArray> implements CollectibleCodec<DataObject> {
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
+public class DataObjectCodec extends AbstractDataCodec<DataObject, DataArray> implements CollectibleCodec<DataObject> {
+    /**
+     *
+     * TODO
+     *
+     */
     public static final String ID_FIELD = "_id";
+    /**
+     *
+     * TODO
+     *
+     */
     public static final String DATE_FIELD = "$date";
+    /**
+     *
+     * TODO
+     *
+     */
     public static final String BINARY_FIELD = "$binary";
+    /**
+     *
+     * TODO
+     *
+     */
     public static final String TYPE_FIELD = "$type";
+    /**
+     *
+     * TODO
+     *
+     */
     public static final String OID_FIELD = "$oid";
+    /**
+     *
+     * TODO
+     *
+     */
     public static final String LONG_FIELD = "$numberLong";
+    /**
+     *
+     * TODO
+     *
+     */
     public static final String DECIMAL_FIELD = "$numberDecimal";
-
+    /**
+     *
+     * TODO
+     *
+     */
     //https://docs.mongodb.org/manual/reference/mongodb-extended-json/#timestamp
     public static final String TIMESTAMP_FIELD = "$timestamp";
+    /**
+     *
+     * TODO
+     *
+     */
     public static final String TIMESTAMP_TIME_FIELD = "t";
+    /**
+     *
+     * TODO
+     *
+     */
     public static final String TIMESTAMP_INCREMENT_FIELD = "i";
 
     private boolean useObjectId = false;
 
+    /**
+     *
+     * TODO
+     *
+     * @param useObjectId TODO
+     */
     public DataObjectCodec(boolean useObjectId) {
         this.useObjectId = useObjectId;
     }
@@ -50,6 +111,12 @@ public class DataObjectCodec  extends AbstractDataCodec<DataObject, DataArray> i
         return json;
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @return TODO
+     */
     public static String generateHexObjectId() {
         ObjectId id = new ObjectId();
         return id.toHexString();

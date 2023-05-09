@@ -11,9 +11,22 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class ReadPreferenceParser {
     private final ReadPreference readPreference;
 
+    /**
+     *
+     * TODO
+     *
+     * @param connectionString TODO
+     * @param config TODO
+     */
     public ReadPreferenceParser(ConnectionString connectionString, MongoClientProperties config) {
         ReadPreference connStringReadPreference = connectionString != null ? connectionString.getReadPreference() : null;
         if (connStringReadPreference != null) {
@@ -54,6 +67,11 @@ public class ReadPreferenceParser {
         }
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public ReadPreference readPreference() {
         return readPreference;
     }

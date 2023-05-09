@@ -12,20 +12,29 @@ import java.util.stream.StreamSupport;
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 
 /**
- * &#064;author sunkaihan
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
  */
 public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable {
 
     private Map<String, Object> map;
 
+    /**
+     *
+     * TODO
+     *
+     */
     public DataObject() {
         map = new LinkedHashMap<>();
     }
 
     /**
-     * Create an instance from a Map. The Map is not copied.
      *
-     * @param map the map to create the instance from.
+     * TODO
+     *
+     * @param map TODO
      */
     public DataObject(Map<String, Object> map) {
         if (map == null) {
@@ -34,10 +43,25 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         this.map = map;
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param key TODO
+     * @param type TODO
+     * @return TODO
+     */
     public boolean keyWasType(String key, Class<?> type) {
         return map.containsKey(key) && map.get(key).getClass().isAssignableFrom(type);
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public String getString(String key) {
         Objects.requireNonNull(key);
         Object val = map.get(key);
@@ -58,11 +82,23 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public Number getNumber(String key) {
         Objects.requireNonNull(key);
         return (Number) map.get(key);
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public Integer getInteger(String key) {
         Objects.requireNonNull(key);
         Number number = (Number) map.get(key);
@@ -75,6 +111,12 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public Long getLong(String key) {
         Objects.requireNonNull(key);
         Number number = (Number) map.get(key);
@@ -87,6 +129,12 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public Double getDouble(String key) {
         Objects.requireNonNull(key);
         Number number = (Number) map.get(key);
@@ -99,6 +147,12 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public Float getFloat(String key) {
         Objects.requireNonNull(key);
         Number number = (Number) map.get(key);
@@ -111,11 +165,23 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public Boolean getBoolean(String key) {
         Objects.requireNonNull(key);
         return (Boolean) map.get(key);
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public DataObject getDataObject(String key) {
         Objects.requireNonNull(key);
         Object val = map.get(key);
@@ -126,6 +192,12 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         return (DataObject) val;
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public DataArray getDataArray(String key) {
         Objects.requireNonNull(key);
         Object val = map.get(key);
@@ -136,6 +208,12 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         return (DataArray) val;
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public byte[] getBinary(String key) {
         Objects.requireNonNull(key);
         Object val = map.get(key);
@@ -157,6 +235,12 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         return Utils.BASE64_DECODER.decode(encoded);
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public Buffer getBuffer(String key) {
         Objects.requireNonNull(key);
         Object val = map.get(key);
@@ -180,6 +264,12 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         return Buffer.buffer(Utils.BASE64_DECODER.decode(encoded));
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public Instant getInstant(String key) {
         Objects.requireNonNull(key);
         Object val = map.get(key);
@@ -197,16 +287,37 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         return Instant.from(ISO_INSTANT.parse(encoded));
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public Object getValue(String key) {
         Objects.requireNonNull(key);
         return Utils.wrapJsonValue(map.get(key));
     }
 
+    /**
+     * TODO
+     *
+     * @param key   TODO
+     * @param clazz TODO
+     * @param <T>   TODO
+     * @return TODO
+     */
     public <T> T getValue(String key, Class<T> clazz) {
         Objects.requireNonNull(key);
         return clazz.cast(map.get(key));
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public String getString(String key, String def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -216,6 +327,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public Number getNumber(String key, Number def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -225,6 +343,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public Integer getInteger(String key, Integer def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -234,6 +359,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public Long getLong(String key, Long def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -243,6 +375,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public Double getDouble(String key, Double def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -252,6 +391,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public Float getFloat(String key, Float def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -261,6 +407,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public Boolean getBoolean(String key, Boolean def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -270,6 +423,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public DataObject getDataObject(String key, DataObject def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -279,6 +439,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public DataArray getDataArray(String key, DataArray def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -288,6 +455,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public byte[] getBinary(String key, byte[] def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -297,6 +471,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public Buffer getBuffer(String key, Buffer def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -306,6 +487,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public Instant getInstant(String key, Instant def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -315,6 +503,13 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @param def TODO
+     * @return TODO
+     */
     public Object getValue(String key, Object def) {
         Objects.requireNonNull(key);
         if (map.containsKey(key)) {
@@ -324,57 +519,90 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public boolean containsKey(String key) {
         Objects.requireNonNull(key);
         return map.containsKey(key);
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public Set<String> fieldNames() {
         return map.keySet();
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public DataObject putNull(String key) {
         Objects.requireNonNull(key);
         map.put(key, null);
         return this;
     }
 
+    /**
+     * TODO
+     *
+     * @param key   TODO
+     * @param value TODO
+     * @return TODO
+     */
     public DataObject put(String key, Object value) {
         Objects.requireNonNull(key);
         map.put(key, value);
         return this;
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public Object remove(String key) {
         Objects.requireNonNull(key);
         return Utils.wrapJsonValue(map.remove(key));
     }
 
+    /**
+     * TODO
+     *
+     * @param other TODO
+     * @return TODO
+     */
     public DataObject mergeIn(DataObject other) {
         return mergeIn(other, false);
     }
 
     /**
-     * Merge in another JSON object.
-     * A deep merge (recursive) matches (sub) JSON objects in the existing tree and replaces all
-     * matching entries. JsonArrays are treated like any other entry, i.e. replaced entirely.
+     * TODO
      *
-     * @param other the other JSON object
-     * @param deep  if true, a deep merge is performed
-     * @return a reference to this, so the API can be used fluently
+     * @param other TODO
+     * @param deep  TODO
+     * @return TODO
      */
     public DataObject mergeIn(DataObject other, boolean deep) {
         return mergeIn(other, deep ? Integer.MAX_VALUE : 1);
     }
 
     /**
-     * Merge in another JSON object.
-     * The merge is deep (recursive) to the specified level. If depth is 0, no merge is performed,
-     * if depth is greater than the depth of one of the objects, a full deep merge is performed.
      *
-     * @param other the other JSON object
-     * @param depth depth of merge
-     * @return a reference to this, so the API can be used fluently
+     * TODO
+     *
+     * @param other TODO
+     * @param depth TODO
+     * @return TODO
      */
     @SuppressWarnings("unchecked")
     public DataObject mergeIn(DataObject other, int depth) {
@@ -411,6 +639,11 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         return copy(Utils.DEFAULT_CLONER);
     }
 
+    /**
+     *
+     * @param cloner TODO
+     * @return TODO
+     */
     public DataObject copy(Function<Object, ?> cloner) {
         Map<String, Object> copiedMap;
         if (map instanceof LinkedHashMap) {
@@ -425,14 +658,29 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
         return new DataObject(copiedMap);
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public Map<String, Object> getMap() {
         return map;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public Stream<Map.Entry<String, Object>> stream() {
         return asStream(iterator());
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public int size() {
         return map.size();
     }
@@ -443,13 +691,20 @@ public class DataObject implements Iterable<Map.Entry<String, Object>>, Copyable
     }
 
     /**
-     * Remove all the entries in this JSON object
+     * TODO
+     *
+     * @return TODO
      */
     public DataObject clear() {
         map.clear();
         return this;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public boolean isEmpty() {
         return map.isEmpty();
     }

@@ -15,16 +15,35 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import java.security.SecureRandom;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class SSLSettingsParser {
     private static final Logger log = LoggerFactory.getLogger(SSLSettingsParser.class);
     private final ConnectionString connectionString;
     private final MongoClientProperties config;
 
+    /**
+     *
+     * TODO
+     *
+     * @param connectionString TODO
+     * @param config TODO
+     */
     public SSLSettingsParser(ConnectionString connectionString, MongoClientProperties config) {
         this.connectionString = connectionString;
         this.config = config;
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @return TODO
+     */
     public SslSettings settings() {
         final SslSettings.Builder builder = SslSettings.builder();
         fromConnectionString(builder);

@@ -45,7 +45,7 @@ javadoc {
     }
 }
 
-description = "${project_root_name}-${project_name}"
+description = "The project ${project_root_name}-${project_name}"
 
 jar {
     baseName "${project_root_name}-${project_name}"
@@ -53,7 +53,7 @@ jar {
 
 def localProperties = new Properties()
 if (Files.exists(Paths.get("$project.rootDir/maven_cert.properties"))) {
-    localProperties.load(new FileInputStream("$project.rootDir/maven_cert.properties"))
+    localProperties.load(new FileInputStream("$rootProject.rootDir/maven_cert.properties"))
     localProperties.each { prop -> project.ext.set(prop.key, prop.value) }
 } else {
     localProperties.setProperty("center_maven_repository_username", "nothing")
@@ -69,8 +69,9 @@ ext {
     signingKeyId = localProperties.getProperty("signing.keyId")
     signingPassword = localProperties.getProperty("signing.password")
     signingGpgKeyFile = localProperties.getProperty("signing.secretKeyRingFile")
+    signingGpgKeyFile = "$rootProject.rootDir/$signingGpgKeyFile"
     signingGpgKey = ''
-    if (Files.exists(Paths.get("$project.rootDir/$signingGpgKeyFile"))) {
+    if (Files.exists(Paths.get(signingGpgKeyFile))) {
         signingGpgKey = new File(signingGpgKeyFile).text
     }
 }
@@ -88,6 +89,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifactId = "${project_root_name}-${project_name}"
+            println("$project.description")
             description = "${project.description}"
             from components.java
             groupId = "${project_group}"

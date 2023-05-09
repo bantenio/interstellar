@@ -11,10 +11,23 @@ import java.util.List;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class ClusterSettingsParser {
 
     private final ClusterSettings settings;
 
+    /**
+     *
+     * TODO
+     *
+     * @param connectionString TODO
+     * @param config TODO
+     */
     public ClusterSettingsParser(ConnectionString connectionString, MongoClientProperties config) {
         ClusterSettings.Builder settings = ClusterSettings.builder();
 
@@ -48,6 +61,11 @@ public class ClusterSettingsParser {
         this.settings = settings.build();
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public ClusterSettings settings() {
         return settings;
     }

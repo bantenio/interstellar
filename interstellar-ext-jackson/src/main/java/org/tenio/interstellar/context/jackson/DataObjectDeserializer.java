@@ -10,8 +10,18 @@ import org.tenio.interstellar.context.DataObject;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class DataObjectDeserializer extends JsonDeserializer<DataObject> {
-
+    /**
+     *
+     * TODO
+     *
+     */
     public static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<Map<String, Object>>() {
     };
 

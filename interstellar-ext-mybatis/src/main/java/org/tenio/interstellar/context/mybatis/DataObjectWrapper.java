@@ -10,9 +10,22 @@ import org.tenio.interstellar.context.DataObject;
 
 import java.util.List;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class DataObjectWrapper extends MapWrapper {
     private DataObject dataObject;
 
+    /**
+     *
+     * TODO
+     *
+     * @param metaObject TODO
+     * @param dataObject TODO
+     */
     public DataObjectWrapper(MetaObject metaObject, DataObject dataObject) {
         super(metaObject, dataObject.getMap());
         this.dataObject = dataObject;

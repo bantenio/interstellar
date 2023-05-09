@@ -20,8 +20,19 @@ public interface NowGetter {
      */
     void rememberNowValue();
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     Number nowValue();
 
+    /**
+     * TODO
+     * <p>
+     * &#064;author:     Ban Tenio
+     * &#064;version:    1.0
+     */
     class MilliNowGetter implements NowGetter {
         private final AtomicLong now = new AtomicLong();
 
@@ -41,6 +52,12 @@ public interface NowGetter {
         }
     }
 
+    /**
+     * TODO
+     * <p>
+     * &#064;author:     Ban Tenio
+     * &#064;version:    1.0
+     */
     class SecondNowGetter implements NowGetter {
         private final AtomicInteger now = new AtomicInteger();
 

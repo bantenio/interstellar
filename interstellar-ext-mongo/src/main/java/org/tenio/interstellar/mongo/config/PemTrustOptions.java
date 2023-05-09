@@ -17,6 +17,12 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class PemTrustOptions {
 
     private KeyStoreHelper helper;
@@ -55,7 +61,7 @@ public class PemTrustOptions {
      *
      * @param certPath the path to add
      * @return a reference to this, so the API can be used fluently
-     * @throws NullPointerException
+     * @throws NullPointerException TODO
      */
     public PemTrustOptions addCertPath(String certPath) throws NullPointerException {
         Objects.requireNonNull(certPath, "No null certificate accepted");
@@ -78,7 +84,7 @@ public class PemTrustOptions {
      *
      * @param certValue the value to add
      * @return a reference to this, so the API can be used fluently
-     * @throws NullPointerException
+     * @throws NullPointerException TODO
      */
     public PemTrustOptions addCertValue(Buffer certValue) throws NullPointerException {
         Objects.requireNonNull(certValue, "No null certificate accepted");
@@ -90,22 +96,40 @@ public class PemTrustOptions {
      * Load and return a Java keystore.
      *
      * @return the {@code KeyStore}
+     * @throws Exception TODO
      */
     public KeyStore loadKeyStore() throws Exception {
         KeyStoreHelper helper = getHelper();
         return helper != null ? helper.store() : null;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     * @throws Exception TODO
+     */
     public TrustManagerFactory getTrustManagerFactory() throws Exception {
         KeyStoreHelper helper = getHelper();
         return helper != null ? helper.getTrustMgrFactory() : null;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     * @throws Exception TODO
+     */
     public Function<String, TrustManager[]> trustManagerMapper() throws Exception {
         KeyStoreHelper helper = getHelper();
         return helper != null ? helper::getTrustMgr : null;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public PemTrustOptions copy() {
         return new PemTrustOptions(this);
     }

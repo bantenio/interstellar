@@ -4,8 +4,20 @@ import io.netty.buffer.AbstractByteBufAllocator;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.UnpooledByteBufAllocator;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class HeapByteBufAllocator extends AbstractByteBufAllocator {
+    /**
+     *
+     * TODO
+     *
+     */
     public static final HeapByteBufAllocator DEFAULT = new HeapByteBufAllocator();
+
     @Override
     protected ByteBuf newHeapBuffer(int initialCapacity, int maxCapacity) {
         return new HeapByteBuf(this, initialCapacity, maxCapacity);

@@ -26,8 +26,19 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class KeyStoreHelper {
     // Dummy password for encrypting pem based stores in memory
+    /**
+     *
+     * TODO
+     *
+     */
     public static final String DUMMY_PASSWORD = "dummy";
     private static final String DUMMY_CERT_ALIAS = "cert-";
 
@@ -40,12 +51,20 @@ public class KeyStoreHelper {
     private final Map<String, X509KeyManager> mgrMap = new HashMap<>();
     private final Map<String, TrustManagerFactory> trustMgrMap = new HashMap<>();
 
+    /**
+     *
+     * TODO
+     *
+     * @param ks TODO
+     * @param password TODO
+     * @throws Exception TODO
+     */
     public KeyStoreHelper(KeyStore ks, String password) throws Exception {
         Enumeration<String> en = ks.aliases();
         while (en.hasMoreElements()) {
             String alias = en.nextElement();
             Certificate cert = ks.getCertificate(alias);
-            if (ks.isCertificateEntry(alias) && ! alias.startsWith(DUMMY_CERT_ALIAS)){
+            if (ks.isCertificateEntry(alias) && !alias.startsWith(DUMMY_CERT_ALIAS)) {
                 final KeyStore keyStore = createEmptyKeyStore();
                 keyStore.setCertificateEntry("cert-1", cert);
                 TrustManagerFactory fact = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
@@ -82,22 +101,27 @@ public class KeyStoreHelper {
                         public String[] getClientAliases(String s, Principal[] principals) {
                             throw new UnsupportedOperationException();
                         }
+
                         @Override
                         public String chooseClientAlias(String[] strings, Principal[] principals, Socket socket) {
                             throw new UnsupportedOperationException();
                         }
+
                         @Override
                         public String[] getServerAliases(String s, Principal[] principals) {
                             throw new UnsupportedOperationException();
                         }
+
                         @Override
                         public String chooseServerAlias(String s, Principal[] principals, Socket socket) {
                             throw new UnsupportedOperationException();
                         }
+
                         @Override
                         public X509Certificate[] getCertificateChain(String s) {
                             return chain.toArray(new X509Certificate[0]);
                         }
+
                         @Override
                         public PrivateKey getPrivateKey(String s) {
                             return key;
@@ -117,12 +141,24 @@ public class KeyStoreHelper {
         this.password = password;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     * @throws Exception TODO
+     */
     public KeyManagerFactory getKeyMgrFactory() throws Exception {
         KeyManagerFactory fact = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-        fact.init(store, password != null ? password.toCharArray(): null);
+        fact.init(store, password != null ? password.toCharArray() : null);
         return fact;
     }
 
+    /**
+     * TODO
+     *
+     * @param serverName TODO
+     * @return TODO
+     */
     public X509KeyManager getKeyMgr(String serverName) {
         X509KeyManager mgr = mgrMap.get(serverName);
         if (mgr == null && !wildcardMgrMap.isEmpty()) {
@@ -135,21 +171,45 @@ public class KeyStoreHelper {
         return mgr;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     * @throws Exception TODO
+     */
     public KeyManager[] getKeyMgr() throws Exception {
         return getKeyMgrFactory().getKeyManagers();
     }
 
+    /**
+     * TODO
+     *
+     * @param serverName TODO
+     * @return TODO
+     */
     public TrustManager[] getTrustMgr(String serverName) {
         TrustManagerFactory fact = trustMgrMap.get(serverName);
         return fact != null ? fact.getTrustManagers() : null;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     * @throws Exception TODO
+     */
     public TrustManagerFactory getTrustMgrFactory() throws Exception {
         TrustManagerFactory fact = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
         fact.init(store);
         return fact;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     * @throws Exception TODO
+     */
     public TrustManager[] getTrustMgrs() throws Exception {
         return getTrustMgrFactory().getTrustManagers();
     }
@@ -161,6 +221,13 @@ public class KeyStoreHelper {
         return store;
     }
 
+    /**
+     * TODO
+     *
+     * @param dn TODO
+     * @return TODO
+     * @throws Exception TODO
+     */
     public static List<String> getX509CertificateCommonNames(String dn) throws Exception {
         List<String> names = new ArrayList<>();
         if (!PlatformDependent.isAndroid()) {
@@ -175,7 +242,7 @@ public class KeyStoreHelper {
             String [] rdns = dn.trim().split("[,;]");
             for(String rdn : rdns) {
                 String [] nvp = rdn.trim().split("=");
-                if(nvp.length == 2 && "cn".equalsIgnoreCase(nvp[0])) {
+                if (nvp.length == 2 && "cn".equalsIgnoreCase(nvp[0])) {
                     names.add(nvp[1]);
                 }
             }
@@ -184,6 +251,16 @@ public class KeyStoreHelper {
         return names;
     }
 
+    /**
+     * TODO
+     *
+     * @param type     TODO
+     * @param provider TODO
+     * @param password TODO
+     * @param value    TODO
+     * @return TODO
+     * @throws Exception TODO
+     */
     public static KeyStore loadKeyStoreOptions(String type, String provider, String password, Supplier<Buffer> value) throws Exception {
         Objects.requireNonNull(type);
         KeyStore ks = provider == null ? KeyStore.getInstance(type) : KeyStore.getInstance(type, provider);
@@ -193,6 +270,14 @@ public class KeyStoreHelper {
         return ks;
     }
 
+    /**
+     * TODO
+     *
+     * @param keyValue  TODO
+     * @param certValue TODO
+     * @return TODO
+     * @throws Exception TODO
+     */
     public static KeyStore loadKeyCert(List<Buffer> keyValue, List<Buffer> certValue) throws Exception {
         if (keyValue.size() < certValue.size()) {
             throw new MongoException("Missing private key");
@@ -254,6 +339,13 @@ public class KeyStoreHelper {
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param certValues TODO
+     * @return TODO
+     * @throws Exception TODO
+     */
     public static KeyStore loadCA(Stream<Buffer> certValues) throws Exception {
         final KeyStore keyStore = createEmptyKeyStore();
         keyStore.load(null, null);
@@ -334,7 +426,6 @@ public class KeyStoreHelper {
      * The "old" default "JKS" (available since Java 1.2) can only store private keys and trusted
      * public-key certificates, and they are based on a proprietary format that is not easily
      * extensible to new cryptographic algorithms.
-
      * @return keystore instance
      *
      * @throws KeyStoreException if the underlying engine cannot create an instance

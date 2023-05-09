@@ -12,6 +12,12 @@ import java.time.Instant;
 
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class InstantDeserializer extends JsonDeserializer<Instant> {
     @Override
     public Instant deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {

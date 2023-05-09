@@ -10,8 +10,18 @@ import org.tenio.interstellar.context.DataArray;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class DataArrayDeserializer extends JsonDeserializer<DataArray> {
-
+    /**
+     *
+     * TODO
+     *
+     */
     public static final TypeReference<List<Object>> MAP_TYPE = new TypeReference<List<Object>>() {
     };
 

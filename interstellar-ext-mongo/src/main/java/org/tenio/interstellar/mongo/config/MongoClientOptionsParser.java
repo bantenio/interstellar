@@ -15,12 +15,24 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class MongoClientOptionsParser {
     private final static CodecRegistry commonCodecRegistry = CodecRegistries.fromCodecs(new StringCodec(), new IntegerCodec(),
             new BooleanCodec(), new DoubleCodec(), new LongCodec(), new BsonDocumentCodec(), new DocumentCodec());
     private final MongoClientSettings settings;
     private final String database;
 
+    /**
+     *
+     * TODO
+     *
+     * @param config TODO
+     */
     public MongoClientOptionsParser(MongoClientProperties config) {
         Objects.requireNonNull(config);
         MongoClientSettings.Builder options = MongoClientSettings.builder();
@@ -89,10 +101,20 @@ public class MongoClientOptionsParser {
         this.settings = options.build();
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public MongoClientSettings settings() {
         return settings;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public String database() {
         return database;
     }

@@ -11,15 +11,29 @@ import java.util.stream.Stream;
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 
 /**
- * &#064;author sunkaihan
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
  */
 public class DataArray implements Iterable<Object>, Copyable {
     private List<Object> list;
 
+    /**
+     *
+     * TODO
+     *
+     */
     public DataArray() {
         list = new ArrayList<>();
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param list TODO
+     */
     public DataArray(List list) {
         if (list == null) {
             throw new NullPointerException();
@@ -27,6 +41,13 @@ public class DataArray implements Iterable<Object>, Copyable {
         this.list = list;
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public String getString(int pos) {
         Object val = list.get(pos);
 
@@ -47,10 +68,22 @@ public class DataArray implements Iterable<Object>, Copyable {
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public Number getNumber(int pos) {
         return (Number) list.get(pos);
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public Integer getInteger(int pos) {
         Number number = (Number) list.get(pos);
         if (number == null) {
@@ -62,6 +95,12 @@ public class DataArray implements Iterable<Object>, Copyable {
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public Long getLong(int pos) {
         Number number = (Number) list.get(pos);
         if (number == null) {
@@ -73,6 +112,12 @@ public class DataArray implements Iterable<Object>, Copyable {
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public Double getDouble(int pos) {
         Number number = (Number) list.get(pos);
         if (number == null) {
@@ -84,6 +129,12 @@ public class DataArray implements Iterable<Object>, Copyable {
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public Float getFloat(int pos) {
         Number number = (Number) list.get(pos);
         if (number == null) {
@@ -95,10 +146,22 @@ public class DataArray implements Iterable<Object>, Copyable {
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public Boolean getBoolean(int pos) {
         return (Boolean) list.get(pos);
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public DataObject getJsonObject(int pos) {
         Object val = list.get(pos);
         if (val instanceof Map) {
@@ -108,6 +171,12 @@ public class DataArray implements Iterable<Object>, Copyable {
         return (DataObject) val;
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public DataArray getJsonArray(int pos) {
         Object val = list.get(pos);
         if (val instanceof List) {
@@ -117,6 +186,12 @@ public class DataArray implements Iterable<Object>, Copyable {
         return (DataArray) val;
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public byte[] getBinary(int pos) {
         Object val = list.get(pos);
         // no-op
@@ -137,6 +212,12 @@ public class DataArray implements Iterable<Object>, Copyable {
         return Utils.BASE64_DECODER.decode(encoded);
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public Buffer getBuffer(int pos) {
         Object val = list.get(pos);
         // no-op
@@ -157,6 +238,12 @@ public class DataArray implements Iterable<Object>, Copyable {
         return Buffer.buffer(Utils.BASE64_DECODER.decode(encoded));
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public Instant getInstant(int pos) {
         Object val = list.get(pos);
         // no-op
@@ -173,52 +260,121 @@ public class DataArray implements Iterable<Object>, Copyable {
         return Instant.from(ISO_INSTANT.parse(encoded));
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public Object getValue(int pos) {
         return Utils.wrapJsonValue(list.get(pos));
     }
 
+    /**
+     * TODO
+     *
+     * @param pos   TODO
+     * @param clazz TODO
+     * @param <T>   TODO
+     * @return TODO
+     */
     public <T> T getValue(int pos, Class<T> clazz) {
         return clazz.cast(list.get(pos));
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public boolean hasNull(int pos) {
         return list.get(pos) == null;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public DataArray addNull() {
         list.add(null);
         return this;
     }
 
+    /**
+     * TODO
+     *
+     * @param value TODO
+     * @return TODO
+     */
     public DataArray add(Object value) {
         list.add(value);
         return this;
     }
 
+    /**
+     * TODO
+     *
+     * @param pos   TODO
+     * @param value TODO
+     * @return TODO
+     */
     public DataArray add(int pos, Object value) {
         list.add(pos, value);
         return this;
     }
 
+    /**
+     * TODO
+     *
+     * @param array TODO
+     * @return TODO
+     */
     public DataArray addAll(DataArray array) {
         list.addAll(array.list);
         return this;
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public DataArray setNull(int pos) {
         list.set(pos, null);
         return this;
     }
 
+    /**
+     * TODO
+     *
+     * @param pos   TODO
+     * @param value TODO
+     * @return TODO
+     */
     public DataArray set(int pos, Object value) {
         list.set(pos, value);
         return this;
     }
 
+    /**
+     * TODO
+     *
+     * @param value TODO
+     * @return TODO
+     */
     public boolean contains(Object value) {
         return list.contains(value);
     }
 
+    /**
+     * TODO
+     *
+     * @param value TODO
+     * @return TODO
+     */
     public boolean remove(Object value) {
         final Object wrappedValue = Utils.wrapJsonValue(value);
         for (int i = 0; i < list.size(); i++) {
@@ -239,22 +395,48 @@ public class DataArray implements Iterable<Object>, Copyable {
         return false;
     }
 
+    /**
+     * TODO
+     *
+     * @param pos TODO
+     * @return TODO
+     */
     public Object remove(int pos) {
         return Utils.wrapJsonValue(list.remove(pos));
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public int size() {
         return list.size();
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public boolean isEmpty() {
         return list.isEmpty();
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public List getList() {
         return list;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public DataArray clear() {
         list.clear();
         return this;
@@ -270,6 +452,10 @@ public class DataArray implements Iterable<Object>, Copyable {
         return copy(Utils.DEFAULT_CLONER);
     }
 
+    /**
+     * @param cloner TODO
+     * @return TODO
+     */
     public DataArray copy(Function<Object, ?> cloner) {
         List<Object> copiedList = new ArrayList<>(list.size());
         for (Object val : list) {
@@ -278,6 +464,11 @@ public class DataArray implements Iterable<Object>, Copyable {
         return new DataArray(copiedList);
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public Stream<Object> stream() {
         return DataObject.asStream(iterator());
     }

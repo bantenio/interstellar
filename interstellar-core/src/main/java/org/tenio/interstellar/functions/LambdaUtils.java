@@ -13,6 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class LambdaUtils {
 
     private static final Map<Class, Class> PRIMITIVE_TYPE_OBJECT_TYPE_MAPPING = new HashMap<>();
@@ -32,6 +38,12 @@ public class LambdaUtils {
         PRIMITIVE_TYPE_OBJECT_TYPE_MAPPING.put(double.class, Double.class);
     }
 
+    /**
+     * TODO
+     *
+     * @param fn TODO
+     * @return TODO
+     */
     public SerializedLambda getSerializedLambda(Serializable fn) {
         SerializedLambda lambda = CLASS_LAMBDA_CACHE.get(fn.getClass());
         // 先检查缓存中是否已存在
@@ -49,6 +61,16 @@ public class LambdaUtils {
         return lambda;
     }
 
+    /**
+     * TODO
+     *
+     * @param type             TODO
+     * @param methodName       TODO
+     * @param parameterClasses TODO
+     * @return TODO
+     * @throws NoSuchMethodException  TODO
+     * @throws IllegalAccessException TODO
+     */
     public static MethodType getMethodType(Class<?> type,
                                            String methodName,
                                            Class<?>[] parameterClasses)
@@ -63,6 +85,16 @@ public class LambdaUtils {
         return methodType;
     }
 
+    /**
+     * TODO
+     *
+     * @param type             TODO
+     * @param methodName       TODO
+     * @param parameterClasses TODO
+     * @return TODO
+     * @throws NoSuchMethodException  TODO
+     * @throws IllegalAccessException TODO
+     */
     public static MethodHandle getMethodHandler(Class<?> type,
                                                 String methodName,
                                                 Class<?>[] parameterClasses)
@@ -77,6 +109,13 @@ public class LambdaUtils {
         return methodHandle;
     }
 
+    /**
+     * TODO
+     *
+     * @param returnType     TODO
+     * @param parameterTypes TODO
+     * @return TODO
+     */
     public static MethodType convertPrimitiveType(Class returnType, Class[] parameterTypes) {
         if (PRIMITIVE_TYPE_OBJECT_TYPE_MAPPING.containsKey(returnType)) {
             returnType = PRIMITIVE_TYPE_OBJECT_TYPE_MAPPING.get(returnType);

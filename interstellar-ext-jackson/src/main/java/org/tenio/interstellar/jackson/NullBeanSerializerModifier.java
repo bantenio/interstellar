@@ -31,6 +31,12 @@ public class NullBeanSerializerModifier extends BeanSerializerModifier {
         return beanProperties;
     }
 
+    /**
+     * TODO
+     *
+     * @param writer TODO
+     * @return TODO
+     */
     protected boolean isArrayType(BeanPropertyWriter writer) {
         Class<?> clazz = writer.getPropertyType();
         return clazz.isArray() || clazz.equals(List.class) || clazz.equals(Set.class);

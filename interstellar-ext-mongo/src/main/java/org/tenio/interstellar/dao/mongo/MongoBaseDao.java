@@ -19,17 +19,36 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class MongoBaseDao implements Dao {
 
     private final MongoDatabase database;
 
     private final String collName;
 
+    /**
+     *
+     * TODO
+     *
+     * @param database TODO
+     * @param collName TODO
+     */
     public MongoBaseDao(MongoDatabase database, String collName) {
         this.database = database;
         this.collName = collName;
     }
 
+    /**
+     *
+     * TODO
+     *
+     * @return TODO
+     */
     public String getCollName() {
         return collName;
     }

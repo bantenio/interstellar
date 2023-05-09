@@ -6,9 +6,21 @@ import freemarker.template.Template;
 import java.io.StringWriter;
 import java.util.Map;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class FreeMarkerSqlTemplate implements SqlTemplate {
     private final Configuration cfg;
 
+    /**
+     *
+     * TODO
+     *
+     * @param cfg TODO
+     */
     public FreeMarkerSqlTemplate(Configuration cfg) {
         this.cfg = cfg;
     }

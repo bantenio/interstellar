@@ -34,7 +34,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
 /**
- * &#064;author sunkaihan
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
  */
 public class ObjectMapperFactory {
     /**
@@ -49,8 +52,13 @@ public class ObjectMapperFactory {
      * 默认时间格式
      */
     public static final String DEFAULT_TIME_FORMAT = "HH:mm:ss";
-
+    /**
+     * TODO
+     */
     public static final String COMMON_OBJECT_MAPPER_BUILDER = "commonObjectMapperBuilder";
+    /**
+     * TODO
+     */
     public static final String IGNORE_NULL_OBJECT_MAPPER_BUILDER = "ignoreNullObjectMapperBuilder";
 
     private static final Map<String, Consumer<ObjectMapper>> objectMapperBuilders = new ConcurrentHashMap<>();
@@ -60,10 +68,21 @@ public class ObjectMapperFactory {
         registerObjectMapperBuilder(IGNORE_NULL_OBJECT_MAPPER_BUILDER, ObjectMapperFactory::buildIgnoreNullObjectMapper);
     }
 
+    /**
+     * TODO
+     *
+     * @param key     TODO
+     * @param builder TODO
+     */
     public static void registerObjectMapperBuilder(String key, Consumer<ObjectMapper> builder) {
         objectMapperBuilders.put(key, builder);
     }
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     */
     public static void simpleModule(ObjectMapper objectMapper) {
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(DataObject.class, new DataObjectSerializer());
@@ -79,6 +98,11 @@ public class ObjectMapperFactory {
         objectMapper.registerModule(simpleModule);
     }
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     */
     public static void javaTimeModule(ObjectMapper objectMapper) {
         JavaTimeModule javaTimeModule = new JavaTimeModule();
         javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)));
@@ -90,15 +114,31 @@ public class ObjectMapperFactory {
         objectMapper.registerModule(javaTimeModule);
     }
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     */
     public static void disableWriteTimestamps(ObjectMapper objectMapper) {
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.disable(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS);
     }
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     */
     public static void ignoreNull(ObjectMapper objectMapper) {
         objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     * @return TODO
+     */
     public static ObjectMapper buildCommonObjectMapper(ObjectMapper objectMapper) {
         simpleModule(objectMapper);
         javaTimeModule(objectMapper);
@@ -112,12 +152,24 @@ public class ObjectMapperFactory {
         return objectMapper;
     }
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     * @return TODO
+     */
     public static ObjectMapper buildIgnoreNullObjectMapper(ObjectMapper objectMapper) {
         buildCommonObjectMapper(objectMapper);
         ignoreNull(objectMapper);
         return objectMapper;
     }
 
+    /**
+     * TODO
+     *
+     * @param key TODO
+     * @return TODO
+     */
     public static ObjectMapper objectMapper(String key) {
         if (!objectMapperBuilders.containsKey(key)) {
             throw new IllegalStateException(CharSequenceUtil.format("The {} ObjectMapper builder is not register.", key));
@@ -127,14 +179,29 @@ public class ObjectMapperFactory {
         return objectMapper;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public static ObjectMapper objectMapper() {
         return commonObjectMapper();
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public static ObjectMapper commonObjectMapper() {
         return objectMapper(COMMON_OBJECT_MAPPER_BUILDER);
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public static ObjectMapper ignoreNullObjectMapper() {
         return objectMapper(IGNORE_NULL_OBJECT_MAPPER_BUILDER);
     }

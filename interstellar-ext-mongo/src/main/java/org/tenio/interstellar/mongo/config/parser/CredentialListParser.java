@@ -10,10 +10,22 @@ import java.util.List;
 
 import static com.mongodb.AuthenticationMechanism.*;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class CredentialListParser {
 
     private final List<MongoCredential> credentials;
 
+    /**
+     *
+     * TODO
+     *
+     * @param mongoClientProperties TODO
+     */
     public CredentialListParser(MongoClientProperties mongoClientProperties) {
         String username = mongoClientProperties.getUsername();
         // AuthMechanism
@@ -75,6 +87,11 @@ public class CredentialListParser {
         return mechanism;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public List<MongoCredential> credentials() {
         return credentials;
     }

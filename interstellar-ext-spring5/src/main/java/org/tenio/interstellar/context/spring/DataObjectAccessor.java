@@ -9,6 +9,12 @@ import org.springframework.expression.spel.CompilablePropertyAccessor;
 import org.springframework.util.Assert;
 import org.tenio.interstellar.context.DataObject;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class DataObjectAccessor implements CompilablePropertyAccessor {
 
     @Override

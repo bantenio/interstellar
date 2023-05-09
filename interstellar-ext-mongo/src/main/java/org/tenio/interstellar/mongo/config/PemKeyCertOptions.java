@@ -14,6 +14,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class PemKeyCertOptions {
     private KeyStoreHelper helper;
     private List<String> keyPaths;
@@ -241,19 +247,21 @@ public class PemKeyCertOptions {
     }
 
     /**
-     * Get all the certificates as a list of buffer
      *
-     * @return  certificates as a list of buffers
+     * TODO
+     *
+     * @return TODO
      */
     public List<Buffer> getCertValues() {
         return certValues;
     }
 
     /**
-     * Set all the certificates as a list of buffer
      *
-     * @param certValues  the certificates as a list of buffer
-     * @return a reference to this, so the API can be used fluently
+     * TODO
+     *
+     * @param certValues TODO
+     * @return TODO
      */
     public PemKeyCertOptions setCertValues(List<Buffer> certValues) {
         this.certValues.clear();
@@ -262,10 +270,10 @@ public class PemKeyCertOptions {
     }
 
     /**
-     * Add a certificate as a buffer
+     * TODO
      *
-     * @param certValue the certificate to add
-     * @return a reference to this, so the API can be used fluently
+     * @param certValue TODO
+     * @return TODO
      */
     public PemKeyCertOptions addCertValue(Buffer certValue) {
         Objects.requireNonNull(certValue != null, "Null certValue");
@@ -273,6 +281,11 @@ public class PemKeyCertOptions {
         return this;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public PemKeyCertOptions copy() {
         return new PemKeyCertOptions(this);
     }
@@ -297,20 +310,34 @@ public class PemKeyCertOptions {
     }
 
     /**
-     * Load and return a Java keystore.
      *
-     * @return the {@code KeyStore}
+     * TODO
+     *
+     * @return TODO
+     * @throws Exception TODO
      */
     public KeyStore loadKeyStore() throws Exception {
         KeyStoreHelper helper = getHelper();
         return helper != null ? helper.store() : null;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     * @throws Exception TODO
+     */
     public KeyManagerFactory getKeyManagerFactory() throws Exception {
         KeyStoreHelper helper = getHelper();
         return helper != null ? helper.getKeyMgrFactory() : null;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     * @throws Exception TODO
+     */
     public Function<String, X509KeyManager> keyManagerMapper() throws Exception {
         KeyStoreHelper helper = getHelper();
         return helper != null ? helper::getKeyMgr : null;

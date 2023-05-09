@@ -9,8 +9,24 @@ import java.util.function.Function;
 
 import static java.time.format.DateTimeFormatter.ISO_INSTANT;
 
+/**
+ * TODO
+ * <p>
+ * &#064;author:     Ban Tenio
+ * &#064;version:    1.0
+ */
 public class Utils {
+    /**
+     *
+     * TODO
+     *
+     */
     public static final java.util.Base64.Encoder BASE64_ENCODER;
+    /**
+     *
+     * TODO
+     *
+     */
     public static final java.util.Base64.Decoder BASE64_DECODER;
 
     static {
@@ -18,10 +34,22 @@ public class Utils {
         BASE64_DECODER = java.util.Base64.getUrlDecoder();
     }
 
+    /**
+     *
+     * TODO
+     *
+     */
     public static final Function<Object, ?> DEFAULT_CLONER = o -> {
         throw new IllegalStateException("Illegal type in Json: " + o.getClass());
     };
 
+    /**
+     *
+     * TODO
+     *
+     * @param val TODO
+     * @return TODO
+     */
     public static Object wrapJsonValue(Object val) {
         if (val == null) {
             return null;
@@ -43,7 +71,13 @@ public class Utils {
         return val;
     }
 
-
+    /**
+     * TODO
+     *
+     * @param val    TODO
+     * @param cloner TODO
+     * @return TODO
+     */
     public static Object checkAndCopy(Object val, Function<Object, ?> cloner) {
         if (val == null) {
             // OK
