@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    api project(":${project_root_name}-${sub_core}")
+    api project(":interstellar-core")
 
     api group: 'io.projectreactor', name: 'reactor-core', version: "${ReactorVersion}"
 }

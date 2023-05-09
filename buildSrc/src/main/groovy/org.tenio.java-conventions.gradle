@@ -26,6 +26,7 @@ ext {
 
 group = "io.github.bantenio.${project_root_name}"
 version = "${version}"
+description = "$project_description"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -44,8 +45,6 @@ javadoc {
         options.addBooleanOption('html5', true)
     }
 }
-
-description = "The project ${project_root_name}-${project_name}"
 
 jar {
     baseName "${project_root_name}-${project_name}"
@@ -89,12 +88,11 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifactId = "${project_root_name}-${project_name}"
-            println("$project.description")
-            description = "${project.description}"
             from components.java
             groupId = "${project_group}"
             pom {
                 name = "${project_root_name}-${project_name}"
+                description = "$project.description"
                 url = "${project_url}"
                 licenses {
                     license {
