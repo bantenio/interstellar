@@ -10,4 +10,5 @@ java {
 dependencies {
     api project(":${project_root_name}-${sub_ext_jackson}")
     api group: 'org.springframework', name: 'spring-expression', version: "${SpringVersion}"
+    api group: 'org.springframework', name: 'spring-web', version: "${SpringVersion}"
 }
