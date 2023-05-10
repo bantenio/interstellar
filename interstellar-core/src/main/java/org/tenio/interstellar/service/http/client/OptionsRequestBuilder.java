@@ -5,15 +5,15 @@ import org.tenio.interstellar.service.http.HttpMethod;
 /**
  * @projectName: interstellar
  * @package: org.tenio.interstellar.service.http.client
- * @className: GetRequestBuilder
+ * @className: OptionsRequestBuilder
  * @author: Ban Tenio
  * @description: TODO
  * @date: 2023/5/10 09:51
  * @version: 1.0
  */
-public class GetRequestBuilder extends RequestBuilder<GetRequestBuilder> {
-    public GetRequestBuilder() {
-        super(HttpMethod.GET);
+public class OptionsRequestBuilder extends RequestBuilder<OptionsRequestBuilder> {
+    public OptionsRequestBuilder() {
+        super(HttpMethod.OPTIONS);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class GetRequestBuilder extends RequestBuilder<GetRequestBuilder> {
     }
 
     @Override
-    public GetRequestBuilder setBody(Object body) {
-        throw new UnsupportedOperationException("The GET method not support request body.");
+    public OptionsRequestBuilder setBody(Object body) {
+        throw new UnsupportedOperationException("The OPTIONS method not support request body.");
     }
 }

@@ -38,4 +38,32 @@ public class Requests {
      * TRACE Method
      */
     public static final String HTTP_METHOD_TRACE = "TRACE";
+
+    public static PostRequestBuilder post() {
+        return new PostRequestBuilder();
+    }
+
+    public static GetRequestBuilder get() {
+        return new GetRequestBuilder();
+    }
+
+    public static PutRequestBuilder put() {
+        return new PutRequestBuilder();
+    }
+
+    public static DeleteRequestBuilder delete() {
+        return new DeleteRequestBuilder();
+    }
+
+    public static HeadRequestBuilder head() {
+        return new HeadRequestBuilder();
+    }
+
+    public static OptionsRequestBuilder options() {
+        return new OptionsRequestBuilder();
+    }
+
+    public static TraceRequestBuilder trace() {
+        return new TraceRequestBuilder();
+    }
 }

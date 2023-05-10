@@ -4,6 +4,7 @@ import org.apache.commons.collections4.MultiSet;
 import org.apache.commons.collections4.MultiValuedMap;
 import org.apache.commons.collections4.multimap.HashSetValuedHashMap;
 import org.tenio.interstellar.service.http.HttpHeader;
+import org.tenio.interstellar.service.http.HttpMethod;
 
 import java.util.Collection;
 import java.util.Map;
@@ -23,11 +24,11 @@ import java.util.Set;
 public abstract class RequestBuilder<T extends RequestBuilder<T>> {
     private String host;
     private int port = 80;
-    private String method;
+    private HttpMethod method;
     private String path;
     private String anchor;
-    private HttpHeader httpHeaders = new HttpHeader();
-    private MultiValuedMap<String, String> queryString = new HashSetValuedHashMap<>();
+    private final HttpHeader httpHeaders = new HttpHeader();
+    private final MultiValuedMap<String, String> queryString = new HashSetValuedHashMap<>();
     private final T t;
     private Object body;
 
@@ -42,6 +43,10 @@ public abstract class RequestBuilder<T extends RequestBuilder<T>> {
      * 空的构造器
      */
     public RequestBuilder(String method) {
+        this(HttpMethod.valueOf(method));
+    }
+
+    public RequestBuilder(HttpMethod method) {
         this.method = method;
         this.t = (T) this;
     }
@@ -53,7 +58,7 @@ public abstract class RequestBuilder<T extends RequestBuilder<T>> {
     }
 
     public Object getBody() {
-        return null;
+        return body;
     }
 
     public T setBody(Object body) {
@@ -106,7 +111,7 @@ public abstract class RequestBuilder<T extends RequestBuilder<T>> {
      *
      * @return 请求的Method
      */
-    public String getMethod() {
+    public HttpMethod getMethod() {
         return method;
     }
 
@@ -117,6 +122,16 @@ public abstract class RequestBuilder<T extends RequestBuilder<T>> {
      * @return 当前Builder对象
      */
     public T setMethod(String method) {
+        return setMethod(HttpMethod.valueOf(method));
+    }
+
+    /**
+     * 设置请求的Method方法
+     *
+     * @param method 请求的Method
+     * @return 当前Builder对象
+     */
+    public T setMethod(HttpMethod method) {
         this.method = method;
         return t;
     }
