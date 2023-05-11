@@ -23,36 +23,73 @@ public class JsonInterceptorRequest implements Interceptor, JsonRequestHandler, 
     private Class<?> responseType;
     private TypeReference<?> typeReference;
 
+    /**
+     * TODO
+     */
     public JsonInterceptorRequest() {
         this(JsonUtils.getOrCreate(JsonUtils.COMMON_OBJECT_MAPPER), StandardCharsets.UTF_8);
     }
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     */
     public JsonInterceptorRequest(ObjectMapper objectMapper) {
         this(objectMapper, StandardCharsets.UTF_8);
     }
 
+    /**
+     * TODO
+     *
+     * @param charset TODO
+     */
     public JsonInterceptorRequest(Charset charset) {
         this(JsonUtils.getOrCreate(JsonUtils.COMMON_OBJECT_MAPPER), charset);
     }
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     * @param charset      TODO
+     */
     public JsonInterceptorRequest(ObjectMapper objectMapper, Charset charset) {
         this.objectMapper = objectMapper;
         this.charset = charset;
     }
 
+    /**
+     * @return TODO
+     */
     public Class<?> getResponseType() {
         return responseType;
     }
 
+    /**
+     * TODO
+     *
+     * @param responseType TODO
+     * @return TODO
+     */
     public JsonInterceptorRequest setResponseType(Class<?> responseType) {
         this.responseType = responseType;
         return this;
     }
 
+    /**
+     * @return TODO
+     */
     public TypeReference<?> getTypeReference() {
         return typeReference;
     }
 
+    /**
+     * TODO
+     *
+     * @param typeReference TODO
+     * @return TODO
+     */
     public JsonInterceptorRequest setTypeReference(TypeReference<?> typeReference) {
         this.typeReference = typeReference;
         return this;

@@ -14,11 +14,25 @@ import org.tenio.interstellar.service.http.MediaType;
  * &#064;version: 1.0
  */
 public interface JsonRequestHandler extends StringHandler {
-
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     ObjectMapper getObjectMapper();
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     boolean withContentType();
 
+    /**
+     * TODO
+     *
+     * @param requestBuilder TODO
+     */
     default void preHandle(RequestBuilder<? extends RequestBuilder<?>> requestBuilder) {
         if (requestBuilder.hasBody()) {
             Object data = requestBuilder.getBody();

@@ -16,22 +16,47 @@ import java.nio.charset.StandardCharsets;
  * &#064;version: 1.0
  */
 public class JsonRequestInterceptor extends RequestInterceptor implements JsonRequestHandler {
+    /**
+     * TODO
+     */
     private final ObjectMapper objectMapper;
+    /**
+     * TODO
+     */
     private final Charset charset;
     private boolean withContentType = true;
 
+    /**
+     * TODO
+     */
     public JsonRequestInterceptor() {
         this(JsonUtils.getOrCreate(JsonUtils.COMMON_OBJECT_MAPPER), StandardCharsets.UTF_8);
     }
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     */
     public JsonRequestInterceptor(ObjectMapper objectMapper) {
         this(objectMapper, StandardCharsets.UTF_8);
     }
 
+    /**
+     * TODO
+     *
+     * @param charset TODO
+     */
     public JsonRequestInterceptor(Charset charset) {
         this(JsonUtils.getOrCreate(JsonUtils.COMMON_OBJECT_MAPPER), charset);
     }
 
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     * @param charset      TODO
+     */
     public JsonRequestInterceptor(ObjectMapper objectMapper, Charset charset) {
         this.objectMapper = objectMapper;
         this.charset = charset;

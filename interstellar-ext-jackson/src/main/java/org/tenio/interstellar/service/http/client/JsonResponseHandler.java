@@ -14,12 +14,34 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * &#064;version: 1.0
  */
 public interface JsonResponseHandler extends StringHandler {
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     ObjectMapper getObjectMapper();
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     Class<?> getResponseType();
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     TypeReference<?> getTypeReference();
 
+    /**
+     * TODO
+     *
+     * @param response       TODO
+     * @param requestBuilder TODO
+     * @return TODO
+     */
     default Response afterHandle(Response response, RequestBuilder<? extends RequestBuilder<?>> requestBuilder) {
         Class<?> responseType = getResponseType();
         TypeReference<?> typeReference = getTypeReference();
