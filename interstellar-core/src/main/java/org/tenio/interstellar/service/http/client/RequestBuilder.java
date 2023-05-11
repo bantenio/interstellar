@@ -12,14 +12,14 @@ import java.util.Set;
 
 /**
  * 基础Request构建对象
- *
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: RequestBuilder
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 09:28
- * @version: 1.0
+ * <p>
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: RequestBuilder
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 09:28
+ * &#064;version: 1.0
  */
 public abstract class RequestBuilder<T extends RequestBuilder<T>> {
     private String host;
@@ -40,12 +40,19 @@ public abstract class RequestBuilder<T extends RequestBuilder<T>> {
     }
 
     /**
-     * 空的构造器
+     * 指定方法构造器，支持自定义方法
+     *
+     * @param method Http方法名
      */
     public RequestBuilder(String method) {
         this(HttpMethod.valueOf(method));
     }
 
+    /**
+     * 指定方法构造器
+     *
+     * @param method Http方法
+     */
     public RequestBuilder(HttpMethod method) {
         this.method = method;
         this.t = (T) this;
@@ -53,14 +60,30 @@ public abstract class RequestBuilder<T extends RequestBuilder<T>> {
 
     // region Base http setting
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public boolean hasBody() {
         return false;
     }
 
+    /**
+     * TODO
+     *
+     * @return TODO
+     */
     public Object getBody() {
         return body;
     }
 
+    /**
+     * TODO
+     *
+     * @param body TODO
+     * @return TODO
+     */
     public T setBody(Object body) {
         this.body = body;
         return t;

@@ -5,13 +5,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.tenio.interstellar.service.http.MediaType;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: JsonHandler
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 16:02
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: JsonHandler
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 16:02
+ * &#064;version: 1.0
  */
 public interface JsonRequestHandler extends StringHandler {
 

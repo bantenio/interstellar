@@ -11,13 +11,13 @@ import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: MimeTypeUtils
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 14:06
- * @version: 1.0
+ * &#064;projectName: interstellar <br />
+ * &#064;package: org.tenio.interstellar.service.http.client <br />
+ * &#064;className: MimeTypeUtils <br />
+ * &#064;author: Ban Tenio <br />
+ * &#064;date: 2023/5/10 14:06 <br />
+ * &#064;description: TODO <br />
+ * &#064;version: 1.0 <br />
  */
 public abstract class MimeTypeUtils {
     private static final byte[] BOUNDARY_CHARS =
@@ -327,6 +327,7 @@ public abstract class MimeTypeUtils {
      * when the given list contains too many elements.
      *
      * @param mimeTypes the list of mime types to be sorted
+     * @param <T>       TODO
      * @throws IllegalArgumentException if {@code mimeTypes} contains more
      *                                  than 50 elements
      * @see <a href="https://tools.ietf.org/html/rfc7231#section-5.3.2">HTTP 1.1: Semantics
@@ -357,6 +358,7 @@ public abstract class MimeTypeUtils {
 
     /**
      * Generate a random MIME boundary as bytes, often used in multipart mime types.
+     * @return TODO
      */
     public static byte[] generateMultipartBoundary() {
         Random randomToUse = initRandom();
@@ -387,6 +389,7 @@ public abstract class MimeTypeUtils {
 
     /**
      * Generate a random MIME boundary as String, often used in multipart mime types.
+     * @return TODO
      */
     public static String generateMultipartBoundaryString() {
         return new String(generateMultipartBoundary(), StandardCharsets.US_ASCII);

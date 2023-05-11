@@ -5,13 +5,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: JsonResponseHandler
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 16:09
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: JsonResponseHandler
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 16:09
+ * &#064;version: 1.0
  */
 public interface JsonResponseHandler extends StringHandler {
     ObjectMapper getObjectMapper();

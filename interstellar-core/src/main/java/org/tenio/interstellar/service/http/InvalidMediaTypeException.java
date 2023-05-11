@@ -1,16 +1,18 @@
 package org.tenio.interstellar.service.http;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: InvalidMediaTypeException
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 14:26
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: InvalidMediaTypeException
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 14:26
+ * &#064;version: 1.0
  */
 public class InvalidMediaTypeException extends IllegalArgumentException {
-
+    /**
+     * MediaType名称
+     */
     private final String mediaType;
 
 
@@ -36,6 +38,8 @@ public class InvalidMediaTypeException extends IllegalArgumentException {
 
     /**
      * Return the offending media type.
+     *
+     * @return media type
      */
     public String getMediaType() {
         return this.mediaType;

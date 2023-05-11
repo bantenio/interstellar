@@ -1,13 +1,13 @@
 package org.tenio.interstellar.service.http.client;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: Requests
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 09:28
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: Requests
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 09:28
+ * &#064;version: 1.0
  */
 public class Requests {
     /**
@@ -39,30 +39,65 @@ public class Requests {
      */
     public static final String HTTP_METHOD_TRACE = "TRACE";
 
+    /**
+     * 创建POST请求Builder
+     *
+     * @return TODO
+     */
     public static PostRequestBuilder post() {
         return new PostRequestBuilder();
     }
 
+    /**
+     * 创建GET请求Builder
+     *
+     * @return TODO
+     */
     public static GetRequestBuilder get() {
         return new GetRequestBuilder();
     }
 
+    /**
+     * 创建PUT请求Builder
+     *
+     * @return TODO
+     */
     public static PutRequestBuilder put() {
         return new PutRequestBuilder();
     }
 
+    /**
+     * 创建DELETE请求Builder
+     *
+     * @return TODO
+     */
     public static DeleteRequestBuilder delete() {
         return new DeleteRequestBuilder();
     }
 
+    /**
+     * 创建HEAD请求Builder
+     *
+     * @return TODO
+     */
     public static HeadRequestBuilder head() {
         return new HeadRequestBuilder();
     }
 
+    /**
+     * 创建OPTIONS请求Builder
+     *
+     * @return TODO
+     */
     public static OptionsRequestBuilder options() {
         return new OptionsRequestBuilder();
     }
 
+    /**
+     * 创建TRACE请求Builder
+     *
+     * @return TODO
+     */
     public static TraceRequestBuilder trace() {
         return new TraceRequestBuilder();
     }

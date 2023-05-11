@@ -8,13 +8,13 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: JsonResponseInterceptor
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 16:00
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: JsonResponseInterceptor
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 16:00
+ * &#064;version: 1.0
  */
 public class JsonResponseInterceptor extends ResponseInterceptor implements JsonResponseHandler {
     private final ObjectMapper objectMapper;

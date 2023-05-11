@@ -1,13 +1,13 @@
 package org.tenio.interstellar.service.http.client;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: RequestInterceptor
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 09:28
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: RequestInterceptor
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 09:28
+ * &#064;version: 1.0
  */
 public interface Interceptor {
     /**

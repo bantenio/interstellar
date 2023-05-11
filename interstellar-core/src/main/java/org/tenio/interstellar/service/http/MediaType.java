@@ -10,13 +10,13 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: MediaType
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 14:22
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: MediaType
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 14:22
+ * &#064;version: 1.0
  */
 public class MediaType extends MimeType implements Serializable {
 
@@ -688,6 +688,7 @@ public class MediaType extends MimeType implements Serializable {
     /**
      * Return a replica of this instance with the quality value of the given {@code MediaType}.
      *
+     * @param mediaType TODO
      * @return the same instance if the given MediaType doesn't have a quality value,
      * or a new one otherwise
      */
@@ -721,6 +722,7 @@ public class MediaType extends MimeType implements Serializable {
      * with this method name following the 'valueOf' naming convention
      *
      * @param value the string to parse
+     * @return TODO
      * @throws InvalidMediaTypeException if the media type value cannot be parsed
      * @see #parseMediaType(String)
      */
@@ -798,7 +800,8 @@ public class MediaType extends MimeType implements Serializable {
 
     /**
      * Re-create the given mime types as media types.
-     *
+     * @param mimeTypes TODO
+     * @return TODO
      * @since 5.0
      */
     public static List<MediaType> asMediaTypes(List<MimeType> mimeTypes) {
@@ -811,7 +814,8 @@ public class MediaType extends MimeType implements Serializable {
 
     /**
      * Re-create the given mime type as a media type.
-     *
+     * @param mimeType TODO
+     * @return TODO
      * @since 5.0
      */
     public static MediaType asMediaType(MimeType mimeType) {

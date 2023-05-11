@@ -5,13 +5,13 @@ import cn.hutool.core.lang.Assert;
 import java.io.Serializable;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: HttpMethod
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 14:59
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: HttpMethod
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 14:59
+ * &#064;version: 1.0
  */
 public class HttpMethod implements Comparable<HttpMethod>, Serializable {
 
@@ -75,7 +75,9 @@ public class HttpMethod implements Comparable<HttpMethod>, Serializable {
 
     private static final HttpMethod[] values = new HttpMethod[]{GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS, TRACE};
 
-
+    /**
+     * Http方法名
+     */
     private final String name;
 
 
@@ -91,6 +93,8 @@ public class HttpMethod implements Comparable<HttpMethod>, Serializable {
      *
      * <p>Note that the returned value does not include any HTTP methods defined
      * in WebDav.
+     *
+     * @return standard Http methods
      */
     public static HttpMethod[] values() {
         HttpMethod[] copy = new HttpMethod[values.length];
@@ -141,6 +145,8 @@ public class HttpMethod implements Comparable<HttpMethod>, Serializable {
 
     /**
      * Return the name of this method, e.g. "GET", "POST".
+     *
+     * @return method name
      */
     public String name() {
         return this.name;

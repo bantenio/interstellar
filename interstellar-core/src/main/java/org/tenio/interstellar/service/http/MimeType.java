@@ -11,19 +11,20 @@ import java.nio.charset.Charset;
 import java.util.*;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: MimeType
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 14:04
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: MimeType
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 14:04
+ * &#064;version: 1.0
  */
 public class MimeType implements Comparable<MimeType>, Serializable {
 
     private static final long serialVersionUID = 4085923477777865903L;
-
-
+    /**
+     * TODO
+     */
     protected static final String WILDCARD_TYPE = "*";
 
     private static final String PARAM_CHARSET = "charset";
@@ -65,16 +66,24 @@ public class MimeType implements Comparable<MimeType>, Serializable {
         TOKEN.andNot(separators);
     }
 
-
+    /**
+     * TODO
+     */
     private final String type;
-
+    /**
+     * TODO
+     */
     private final String subtype;
-
+    /**
+     * TODO
+     */
     @SuppressWarnings("serial")
     private final Map<String, String> parameters;
 
     private transient Charset resolvedCharset;
-
+    /**
+     * TODO
+     */
     private volatile String toStringValue;
 
 
@@ -199,6 +208,12 @@ public class MimeType implements Comparable<MimeType>, Serializable {
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param parameter TODO
+     * @param value     TODO
+     */
     protected void checkParameters(String parameter, String value) {
         Assert.notEmpty(parameter, "'parameter' must not be empty");
         Assert.notEmpty(value, "'value' must not be empty");
@@ -220,6 +235,12 @@ public class MimeType implements Comparable<MimeType>, Serializable {
         }
     }
 
+    /**
+     * TODO
+     *
+     * @param s TODO
+     * @return TODO
+     */
     protected String unquote(String s) {
         return (isQuotedString(s) ? s.substring(1, s.length() - 1) : s);
     }
@@ -227,6 +248,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
     /**
      * Indicates whether the {@linkplain #getType() type} is the wildcard character
      * <code>&#42;</code> or not.
+     *
+     * @return TODO
      */
     public boolean isWildcardType() {
         return WILDCARD_TYPE.equals(getType());
@@ -255,6 +278,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
 
     /**
      * Return the primary type.
+     *
+     * @return TODO
      */
     public String getType() {
         return this.type;
@@ -262,6 +287,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
 
     /**
      * Return the subtype.
+     *
+     * @return TODO
      */
     public String getSubtype() {
         return this.subtype;
@@ -270,6 +297,7 @@ public class MimeType implements Comparable<MimeType>, Serializable {
     /**
      * Return the subtype suffix as defined in RFC 6839.
      *
+     * @return TODO
      * @since 5.3
      */
     public String getSubtypeSuffix() {
@@ -484,6 +512,11 @@ public class MimeType implements Comparable<MimeType>, Serializable {
         return value;
     }
 
+    /**
+     * TODO
+     *
+     * @param builder TODO
+     */
     protected void appendTo(StringBuilder builder) {
         builder.append(this.type);
         builder.append('/');
@@ -644,6 +677,13 @@ public class MimeType implements Comparable<MimeType>, Serializable {
         return other.isMoreSpecific(this);
     }
 
+    /**
+     * TODO
+     *
+     * @param ois TODO
+     * @throws IOException            TODO
+     * @throws ClassNotFoundException TODO
+     */
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         // Rely on default serialization, just initialize state after deserialization.
         ois.defaultReadObject();
@@ -660,6 +700,8 @@ public class MimeType implements Comparable<MimeType>, Serializable {
      * Parse the given String value into a {@code MimeType} object,
      * with this method name following the 'valueOf' naming convention
      *
+     * @param value TODO
+     * @return TODO
      * @see MimeTypeUtils#parseMimeType(String)
      */
     public static MimeType valueOf(String value) {

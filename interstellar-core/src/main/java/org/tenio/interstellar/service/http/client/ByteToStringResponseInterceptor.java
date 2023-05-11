@@ -7,21 +7,29 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: ByteToStringRequestInterceptor
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 15:31
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: ByteToStringRequestInterceptor
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 15:31
+ * &#064;version: 1.0
  */
 public class ByteToStringResponseInterceptor extends ResponseInterceptor {
     private final Charset codeCharset;
 
+    /**
+     * 使用默认UTF-8编码
+     */
     public ByteToStringResponseInterceptor() {
         this(StandardCharsets.UTF_8);
     }
 
+    /**
+     * 指定编码
+     *
+     * @param codeCharset 内容编码
+     */
     public ByteToStringResponseInterceptor(Charset codeCharset) {
         this.codeCharset = codeCharset;
     }

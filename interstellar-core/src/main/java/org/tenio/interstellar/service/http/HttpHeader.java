@@ -28,13 +28,13 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * @projectName: interstellar
- * @package: org.tenio.interstellar.service.http.client
- * @className: HttpHeader
- * @author: Ban Tenio
- * @description: TODO
- * @date: 2023/5/10 11:50
- * @version: 1.0
+ * &#064;projectName: interstellar
+ * &#064;package: org.tenio.interstellar.service.http.client
+ * &#064;className: HttpHeader
+ * &#064;author: Ban Tenio
+ * &#064;description: TODO
+ * &#064;date: 2023/5/10 11:50
+ * &#064;version: 1.0
  */
 public class HttpHeader implements MultiValuedMap<String, String>, Serializable {
 
@@ -440,13 +440,23 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
             DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss yyyy", Locale.US).withZone(GMT)
     };
     // endregion
-
+    /**
+     * Header values container
+     */
     private final MultiValuedMap<String, String> headers;
 
+    /**
+     * Create an empty HttpHeader
+     */
     public HttpHeader() {
         headers = new HashSetValuedHashMap<>();
     }
 
+    /**
+     * TODO
+     *
+     * @param headers TODO
+     */
     public HttpHeader(MultiValuedMap<String, String> headers) {
         this.headers = headers;
     }
@@ -468,6 +478,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Set the list of acceptable {@linkplain MediaType media types},
      * as specified by the {@code Accept} header.
+     *
+     * @param acceptableMediaTypes TODO
      */
     public void setAccept(List<MediaType> acceptableMediaTypes) {
         set(ACCEPT, MediaType.toString(acceptableMediaTypes));
@@ -477,6 +489,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Return the list of acceptable {@linkplain MediaType media types},
      * as specified by the {@code Accept} header.
      * <p>Returns an empty list when the acceptable media types are unspecified.
+     *
+     * @return accept media type collection
      */
     public List<MediaType> getAccept() {
         return MediaType.parseMediaTypes(get(ACCEPT));
@@ -486,6 +500,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the acceptable language ranges, as specified by the
      * {@literal Accept-Language} header.
      *
+     * @param languages TODO
      * @since 5.0
      */
     public void setAcceptLanguage(List<Locale.LanguageRange> languages) {
@@ -507,6 +522,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * a list of supported locales you can pass the returned list to
      * {@link Locale#filter(List, Collection)}.
      *
+     * @return TODO
      * @throws IllegalArgumentException if the value cannot be converted to a language range
      * @since 5.0
      */
@@ -518,6 +534,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Variant of {@link #setAcceptLanguage(List)} using {@link Locale}'s.
      *
+     * @param locales TODO
      * @since 5.0
      */
     public void setAcceptLanguageAsLocales(List<Locale> locales) {
@@ -549,6 +566,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the list of acceptable {@linkplain MediaType media types} for
      * {@code PATCH} methods, as specified by the {@code Accept-Patch} header.
      *
+     * @param mediaTypes TODO
      * @since 5.3.6
      */
     public void setAcceptPatch(List<MediaType> mediaTypes) {
@@ -560,6 +578,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * {@code PATCH} methods, as specified by the {@code Accept-Patch} header.
      * <p>Returns an empty list when the acceptable media types are unspecified.
      *
+     * @return TODO
      * @since 5.3.6
      */
     public List<MediaType> getAcceptPatch() {
@@ -568,6 +587,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Access-Control-Allow-Credentials} response header.
+     *
+     * @param allowCredentials TODO
      */
     public void setAccessControlAllowCredentials(boolean allowCredentials) {
         set(ACCESS_CONTROL_ALLOW_CREDENTIALS, Boolean.toString(allowCredentials));
@@ -575,6 +596,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Access-Control-Allow-Credentials} response header.
+     *
+     * @return TODO
      */
     public boolean getAccessControlAllowCredentials() {
         return Boolean.parseBoolean(getFirst(ACCESS_CONTROL_ALLOW_CREDENTIALS));
@@ -582,6 +605,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Access-Control-Allow-Headers} response header.
+     *
+     * @param allowedHeaders TODO
      */
     public void setAccessControlAllowHeaders(List<String> allowedHeaders) {
         set(ACCESS_CONTROL_ALLOW_HEADERS, toCommaDelimitedString(allowedHeaders));
@@ -589,6 +614,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Access-Control-Allow-Headers} response header.
+     *
+     * @return TODO
      */
     public List<String> getAccessControlAllowHeaders() {
         return getValuesAsList(ACCESS_CONTROL_ALLOW_HEADERS);
@@ -596,6 +623,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Access-Control-Allow-Methods} response header.
+     *
+     * @param allowedMethods TODO
      */
     public void setAccessControlAllowMethods(List<HttpMethod> allowedMethods) {
         set(ACCESS_CONTROL_ALLOW_METHODS, CollUtil.join(allowedMethods, ","));
@@ -603,6 +632,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Access-Control-Allow-Methods} response header.
+     *
+     * @return TODO
      */
     public List<HttpMethod> getAccessControlAllowMethods() {
         String value = getFirst(ACCESS_CONTROL_ALLOW_METHODS);
@@ -621,6 +652,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Access-Control-Allow-Origin} response header.
+     *
+     * @param allowedOrigin TODO
      */
     public void setAccessControlAllowOrigin(String allowedOrigin) {
         setOrRemove(ACCESS_CONTROL_ALLOW_ORIGIN, allowedOrigin);
@@ -628,6 +661,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Access-Control-Allow-Origin} response header.
+     *
+     * @return TODO
      */
     public String getAccessControlAllowOrigin() {
         return getFieldValues(ACCESS_CONTROL_ALLOW_ORIGIN);
@@ -635,6 +670,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Access-Control-Expose-Headers} response header.
+     *
+     * @param exposedHeaders TODO
      */
     public void setAccessControlExposeHeaders(List<String> exposedHeaders) {
         set(ACCESS_CONTROL_EXPOSE_HEADERS, toCommaDelimitedString(exposedHeaders));
@@ -642,6 +679,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Access-Control-Expose-Headers} response header.
+     *
+     * @return TODO
      */
     public List<String> getAccessControlExposeHeaders() {
         return getValuesAsList(ACCESS_CONTROL_EXPOSE_HEADERS);
@@ -650,6 +689,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Set the (new) value of the {@code Access-Control-Max-Age} response header.
      *
+     * @param maxAge TODO
      * @since 5.2
      */
     public void setAccessControlMaxAge(Duration maxAge) {
@@ -658,6 +698,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Access-Control-Max-Age} response header.
+     *
+     * @param maxAge TODO
      */
     public void setAccessControlMaxAge(long maxAge) {
         set(ACCESS_CONTROL_MAX_AGE, Long.toString(maxAge));
@@ -666,6 +708,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Return the value of the {@code Access-Control-Max-Age} response header.
      * <p>Returns -1 when the max age is unknown.
+     *
+     * @return TODO
      */
     public long getAccessControlMaxAge() {
         String value = getFirst(ACCESS_CONTROL_MAX_AGE);
@@ -674,6 +718,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Access-Control-Request-Headers} request header.
+     *
+     * @param requestHeaders TODO
      */
     public void setAccessControlRequestHeaders(List<String> requestHeaders) {
         set(ACCESS_CONTROL_REQUEST_HEADERS, toCommaDelimitedString(requestHeaders));
@@ -681,6 +727,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Access-Control-Request-Headers} request header.
+     *
+     * @return TODO
      */
     public List<String> getAccessControlRequestHeaders() {
         return getValuesAsList(ACCESS_CONTROL_REQUEST_HEADERS);
@@ -688,6 +736,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Access-Control-Request-Method} request header.
+     *
+     * @param requestMethod TODO
      */
     public void setAccessControlRequestMethod(HttpMethod requestMethod) {
         setOrRemove(ACCESS_CONTROL_REQUEST_METHOD, (requestMethod != null ? requestMethod.name() : null));
@@ -695,6 +745,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Access-Control-Request-Method} request header.
+     *
+     * @return TODO
      */
     public HttpMethod getAccessControlRequestMethod() {
         String requestMethod = getFirst(ACCESS_CONTROL_REQUEST_METHOD);
@@ -708,6 +760,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Set the list of acceptable {@linkplain Charset charsets},
      * as specified by the {@code Accept-Charset} header.
+     *
+     * @param acceptableCharsets TODO
      */
     public void setAcceptCharset(List<Charset> acceptableCharsets) {
         StringJoiner joiner = new StringJoiner(", ");
@@ -720,6 +774,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Return the list of acceptable {@linkplain Charset charsets},
      * as specified by the {@code Accept-Charset} header.
+     *
+     * @return TODO
      */
     public List<Charset> getAcceptCharset() {
         String value = getFirst(ACCEPT_CHARSET);
@@ -747,6 +803,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Set the set of allowed {@link HttpMethod HTTP methods},
      * as specified by the {@code Allow} header.
+     *
+     * @param allowedMethods TODO
      */
     public void setAllow(Set<HttpMethod> allowedMethods) {
         set(ALLOW, CollUtil.join(allowedMethods, ","));
@@ -756,6 +814,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Return the set of allowed {@link HttpMethod HTTP methods},
      * as specified by the {@code Allow} header.
      * <p>Returns an empty set when the allowed methods are unspecified.
+     *
+     * @return TODO
      */
     public Set<HttpMethod> getAllow() {
         String value = getFirst(ALLOW);
@@ -847,6 +907,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set a configured {@link CacheControl} instance as the
      * new value of the {@code Cache-Control} header.
      *
+     * @param cacheControl TODO
      * @since 5.0.5
      */
     public void setCacheControl(CacheControl cacheControl) {
@@ -855,6 +916,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Cache-Control} header.
+     *
+     * @param cacheControl TODO
      */
     public void setCacheControl(String cacheControl) {
         setOrRemove(CACHE_CONTROL, cacheControl);
@@ -862,6 +925,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Cache-Control} header.
+     *
+     * @return TODO
      */
     public String getCacheControl() {
         return getFieldValues(CACHE_CONTROL);
@@ -869,6 +934,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Connection} header.
+     *
+     * @param connection TODO
      */
     public void setConnection(String connection) {
         set(CONNECTION, connection);
@@ -876,6 +943,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Connection} header.
+     *
+     * @param connection TODO
      */
     public void setConnection(List<String> connection) {
         set(CONNECTION, toCommaDelimitedString(connection));
@@ -883,6 +952,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Connection} header.
+     *
+     * @return TODO
      */
     public List<String> getConnection() {
         return getValuesAsList(CONNECTION);
@@ -894,6 +965,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * <p>Use {@code put(CONTENT_LANGUAGE, list)} if you need
      * to set multiple content languages.</p>
      *
+     * @param locale TODO
      * @since 5.0
      */
     public void setContentLanguage(Locale locale) {
@@ -921,6 +993,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Set the length of the body in bytes, as specified by the
      * {@code Content-Length} header.
+     *
+     * @param contentLength TODO
      */
     public void setContentLength(long contentLength) {
         set(CONTENT_LENGTH, Long.toString(contentLength));
@@ -930,6 +1004,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Return the length of the body in bytes, as specified by the
      * {@code Content-Length} header.
      * <p>Returns -1 when the content-length is unknown.
+     *
+     * @return TODO
      */
     public long getContentLength() {
         String value = getFirst(CONTENT_LENGTH);
@@ -939,6 +1015,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Set the {@linkplain MediaType media type} of the body,
      * as specified by the {@code Content-Type} header.
+     *
+     * @param mediaType TODO
      */
     public void setContentType(MediaType mediaType) {
         if (mediaType != null) {
@@ -955,6 +1033,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * by the {@code Content-Type} header.
      * <p>Returns {@code null} when the {@code Content-Type} header is not set.
      *
+     * @return TODO
      * @throws InvalidMediaTypeException if the media type value cannot be parsed
      */
     public MediaType getContentType() {
@@ -966,6 +1045,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the date and time at which the message was created, as specified
      * by the {@code Date} header.
      *
+     * @param date TODO
      * @since 5.2
      */
     public void setDate(ZonedDateTime date) {
@@ -976,6 +1056,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the date and time at which the message was created, as specified
      * by the {@code Date} header.
      *
+     * @param date TODO
      * @since 5.2
      */
     public void setDate(Instant date) {
@@ -987,6 +1068,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * by the {@code Date} header.
      * <p>The date should be specified as the number of milliseconds since
      * January 1, 1970 GMT.
+     *
+     * @param date TODO
      */
     public void setDate(long date) {
         setDate(DATE, date);
@@ -998,6 +1081,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * <p>The date is returned as the number of milliseconds since
      * January 1, 1970 GMT. Returns -1 when the date is unknown.
      *
+     * @return TODO
      * @throws IllegalArgumentException if the value cannot be converted to a date
      */
     public long getDate() {
@@ -1006,6 +1090,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) entity tag of the body, as specified by the {@code ETag} header.
+     *
+     * @param etag TODO
      */
     public void setETag(String etag) {
         if (etag != null) {
@@ -1020,6 +1106,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the entity tag of the body, as specified by the {@code ETag} header.
+     *
+     * @return TODO
      */
     public String getETag() {
         return getFirst(ETAG);
@@ -1029,6 +1117,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the duration after which the message is no longer valid,
      * as specified by the {@code Expires} header.
      *
+     * @param expires TODO
      * @since 5.0.5
      */
     public void setExpires(ZonedDateTime expires) {
@@ -1039,6 +1128,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the date and time at which the message is no longer valid,
      * as specified by the {@code Expires} header.
      *
+     * @param expires TODO
      * @since 5.2
      */
     public void setExpires(Instant expires) {
@@ -1050,6 +1140,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * as specified by the {@code Expires} header.
      * <p>The date should be specified as the number of milliseconds since
      * January 1, 1970 GMT.
+     *
+     * @param expires TODO
      */
     public void setExpires(long expires) {
         setDate(EXPIRES, expires);
@@ -1061,6 +1153,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * <p>The date is returned as the number of milliseconds since
      * January 1, 1970 GMT. Returns -1 when the date is unknown.
      *
+     * @return TODO
      * @see #getFirstZonedDateTime(String)
      */
     public long getExpires() {
@@ -1073,6 +1166,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * the host header will only contain the
      * {@linkplain InetSocketAddress#getHostString() host name}.
      *
+     * @param host TODO
      * @since 5.0
      */
     public void setHost(InetSocketAddress host) {
@@ -1094,6 +1188,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * {@linkplain InetSocketAddress#getPort() port} in the returned address will
      * be {@code 0}.
      *
+     * @return TODO
      * @since 5.0
      */
     public InetSocketAddress getHost() {
@@ -1124,6 +1219,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Set the (new) value of the {@code If-Match} header.
      *
+     * @param ifMatch TODO
      * @since 4.3
      */
     public void setIfMatch(String ifMatch) {
@@ -1133,6 +1229,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Set the (new) value of the {@code If-Match} header.
      *
+     * @param ifMatchList TODO
      * @since 4.3
      */
     public void setIfMatch(List<String> ifMatchList) {
@@ -1142,6 +1239,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Return the value of the {@code If-Match} header.
      *
+     * @return TODO
      * @throws IllegalArgumentException if parsing fails
      * @since 4.3
      */
@@ -1153,6 +1251,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the time the resource was last changed, as specified by the
      * {@code Last-Modified} header.
      *
+     * @param ifModifiedSince TODO
      * @since 5.1.4
      */
     public void setIfModifiedSince(ZonedDateTime ifModifiedSince) {
@@ -1163,6 +1262,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the time the resource was last changed, as specified by the
      * {@code Last-Modified} header.
      *
+     * @param ifModifiedSince TODO
      * @since 5.1.4
      */
     public void setIfModifiedSince(Instant ifModifiedSince) {
@@ -1173,6 +1273,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the (new) value of the {@code If-Modified-Since} header.
      * <p>The date should be specified as the number of milliseconds since
      * January 1, 1970 GMT.
+     *
+     * @param ifModifiedSince TODO
      */
     public void setIfModifiedSince(long ifModifiedSince) {
         setDate(IF_MODIFIED_SINCE, ifModifiedSince);
@@ -1183,6 +1285,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * <p>The date is returned as the number of milliseconds since
      * January 1, 1970 GMT. Returns -1 when the date is unknown.
      *
+     * @return TODO
      * @see #getFirstZonedDateTime(String)
      */
     public long getIfModifiedSince() {
@@ -1191,6 +1294,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code If-None-Match} header.
+     *
+     * @param ifNoneMatch TODO
      */
     public void setIfNoneMatch(String ifNoneMatch) {
         set(IF_NONE_MATCH, ifNoneMatch);
@@ -1198,6 +1303,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) values of the {@code If-None-Match} header.
+     *
+     * @param ifNoneMatchList TODO
      */
     public void setIfNoneMatch(List<String> ifNoneMatchList) {
         set(IF_NONE_MATCH, toCommaDelimitedString(ifNoneMatchList));
@@ -1206,6 +1313,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Return the value of the {@code If-None-Match} header.
      *
+     * @return TODO
      * @throws IllegalArgumentException if parsing fails
      */
     public List<String> getIfNoneMatch() {
@@ -1216,6 +1324,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the time the resource was last changed, as specified by the
      * {@code Last-Modified} header.
      *
+     * @param ifUnmodifiedSince TODO
      * @since 5.1.4
      */
     public void setIfUnmodifiedSince(ZonedDateTime ifUnmodifiedSince) {
@@ -1226,6 +1335,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the time the resource was last changed, as specified by the
      * {@code Last-Modified} header.
      *
+     * @param ifUnmodifiedSince TODO
      * @since 5.1.4
      */
     public void setIfUnmodifiedSince(Instant ifUnmodifiedSince) {
@@ -1237,6 +1347,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * <p>The date should be specified as the number of milliseconds since
      * January 1, 1970 GMT.
      *
+     * @param ifUnmodifiedSince TODO
      * @since 4.3
      */
     public void setIfUnmodifiedSince(long ifUnmodifiedSince) {
@@ -1248,6 +1359,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * <p>The date is returned as the number of milliseconds since
      * January 1, 1970 GMT. Returns -1 when the date is unknown.
      *
+     * @return TODO
      * @see #getFirstZonedDateTime(String)
      * @since 4.3
      */
@@ -1259,6 +1371,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the time the resource was last changed, as specified by the
      * {@code Last-Modified} header.
      *
+     * @param lastModified TODO
      * @since 5.1.4
      */
     public void setLastModified(ZonedDateTime lastModified) {
@@ -1269,6 +1382,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Set the time the resource was last changed, as specified by the
      * {@code Last-Modified} header.
      *
+     * @param lastModified TODO
      * @since 5.1.4
      */
     public void setLastModified(Instant lastModified) {
@@ -1280,6 +1394,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * {@code Last-Modified} header.
      * <p>The date should be specified as the number of milliseconds since
      * January 1, 1970 GMT.
+     *
+     * @param lastModified TODO
      */
     public void setLastModified(long lastModified) {
         setDate(LAST_MODIFIED, lastModified);
@@ -1291,6 +1407,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * <p>The date is returned as the number of milliseconds since
      * January 1, 1970 GMT. Returns -1 when the date is unknown.
      *
+     * @return TODO
      * @see #getFirstZonedDateTime(String)
      */
     public long getLastModified() {
@@ -1300,6 +1417,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Set the (new) location of a resource,
      * as specified by the {@code Location} header.
+     *
+     * @param location TODO
      */
     public void setLocation(URI location) {
         setOrRemove(LOCATION, (location != null ? location.toASCIIString() : null));
@@ -1309,6 +1428,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * Return the (new) location of a resource
      * as specified by the {@code Location} header.
      * <p>Returns {@code null} when the location is unknown.
+     *
+     * @return TODO
      */
     public URI getLocation() {
         String value = getFirst(LOCATION);
@@ -1317,6 +1438,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Origin} header.
+     *
+     * @param origin TODO
      */
     public void setOrigin(String origin) {
         setOrRemove(ORIGIN, origin);
@@ -1324,6 +1447,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Origin} header.
+     *
+     * @return TODO
      */
     public String getOrigin() {
         return getFirst(ORIGIN);
@@ -1331,6 +1456,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Pragma} header.
+     *
+     * @param pragma TODO
      */
     public void setPragma(String pragma) {
         setOrRemove(PRAGMA, pragma);
@@ -1338,6 +1465,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Pragma} header.
+     *
+     * @return TODO
      */
     public String getPragma() {
         return getFirst(PRAGMA);
@@ -1345,6 +1474,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Set the (new) value of the {@code Upgrade} header.
+     *
+     * @param upgrade TODO
      */
     public void setUpgrade(String upgrade) {
         setOrRemove(UPGRADE, upgrade);
@@ -1352,6 +1483,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
 
     /**
      * Return the value of the {@code Upgrade} header.
+     *
+     * @return TODO
      */
     public String getUpgrade() {
         return getFirst(UPGRADE);
@@ -1372,6 +1505,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     /**
      * Return the request header names subject to content negotiation.
      *
+     * @return TODO
      * @since 4.3
      */
     public List<String> getVary() {
@@ -1383,6 +1517,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * using the RFC-1123 date-time formatter. The equivalent of
      * {@link #set(String, String)} but for date headers.
      *
+     * @param date       TODO
+     * @param headerName TODO
      * @since 5.0
      */
     public void setZonedDateTime(String headerName, ZonedDateTime date) {
@@ -1394,6 +1530,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * using the RFC-1123 date-time formatter. The equivalent of
      * {@link #set(String, String)} but for date headers.
      *
+     * @param headerName TODO
+     * @param date       TODO
      * @since 5.1.4
      */
     public void setInstant(String headerName, Instant date) {
@@ -1405,6 +1543,8 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * using the RFC-1123 date-time formatter. The equivalent of
      * {@link #set(String, String)} but for date headers.
      *
+     * @param headerName TODO
+     * @param date       TODO
      * @see #setZonedDateTime(String, ZonedDateTime)
      * @since 3.2.4
      */
@@ -1686,6 +1826,7 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
      * @param password the password
      * @param charset  the charset to use to convert the credentials into an octet
      *                 sequence. Defaults to {@linkplain StandardCharsets#ISO_8859_1 ISO-8859-1}.
+     * @return TODO
      * @throws IllegalArgumentException if {@code username} or {@code password}
      *                                  contains characters that cannot be encoded to the given charset
      * @see #setBasicAuth(String)
@@ -1714,6 +1855,13 @@ public class HttpHeader implements MultiValuedMap<String, String>, Serializable 
     }
 
     // region extension function for MultiValuedMap
+
+    /**
+     * TODO
+     *
+     * @param headerName TODO
+     * @param value      TODO
+     */
     public void set(String headerName, String value) {
         this.headers.put(headerName, value);
     }
