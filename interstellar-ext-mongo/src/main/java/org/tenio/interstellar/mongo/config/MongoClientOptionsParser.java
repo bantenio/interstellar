@@ -39,12 +39,12 @@ public class MongoClientOptionsParser {
         CodecProvider pojoCodecProvider = PojoCodecProvider
                 .builder()
                 .automatic(true)
-                .register(config.getSupportPojoPackages().toArray(String[]::new))
+                .register(config.getSupportPojoPackages().stream().toArray(String[]::new))
                 .build();
         options.codecRegistry(CodecRegistries.fromRegistries(
+                CodecRegistries.fromCodecs(new DataObjectCodec(ObjectUtil.defaultIfNull(config.getUseObjectId(), false))),
                 MongoClientSettings.getDefaultCodecRegistry(),
-                CodecRegistries.fromProviders(pojoCodecProvider),
-                CodecRegistries.fromCodecs(new DataObjectCodec(ObjectUtil.defaultIfNull(config.getUseObjectId(), false)))));
+                CodecRegistries.fromProviders(pojoCodecProvider)));
 
         // All parsers should support connection_string first
         String cs = config.getConnectionString();
