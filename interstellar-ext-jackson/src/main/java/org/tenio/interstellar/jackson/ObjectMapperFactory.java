@@ -1,5 +1,6 @@
 package org.tenio.interstellar.jackson;
 
+import cn.hutool.core.map.MapBuilder;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -29,9 +30,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
+
+import static com.fasterxml.jackson.core.JsonParser.Feature.*;
 
 /**
  * TODO
@@ -60,22 +66,63 @@ public class ObjectMapperFactory {
      * TODO
      */
     public static final String IGNORE_NULL_OBJECT_MAPPER_BUILDER = "ignoreNullObjectMapperBuilder";
-
-    private static final Map<String, Consumer<ObjectMapper>> objectMapperBuilders = new ConcurrentHashMap<>();
-
-    static {
-        registerObjectMapperBuilder(COMMON_OBJECT_MAPPER_BUILDER, ObjectMapperFactory::buildCommonObjectMapper);
-        registerObjectMapperBuilder(IGNORE_NULL_OBJECT_MAPPER_BUILDER, ObjectMapperFactory::buildIgnoreNullObjectMapper);
-    }
+    ;
+    /**
+     * TODO
+     */
+    public static final String JSON5_OBJECT_MAPPER_BUILDER = "ignoreNullObjectMapperBuilder";
 
     /**
      * TODO
-     *
-     * @param key     TODO
-     * @param builder TODO
      */
-    public static void registerObjectMapperBuilder(String key, Consumer<ObjectMapper> builder) {
-        objectMapperBuilders.put(key, builder);
+    public static final List<String> COMMONS_OBJECT_MAPPER = Arrays.asList("extendTypes",
+            "javaTime",
+            "disableWriteTimestamps",
+            "parameterNames",
+            "withNullSerializer",
+            "closeUnknownFieldFail");
+
+    /**
+     * TODO
+     */
+    public static final List<String> IGNORE_NULL_OBJECT_MAPPER = Arrays.asList("extendTypes",
+            "javaTime",
+            "disableWriteTimestamps",
+            "parameterNames",
+            "withNullSerializer",
+            "closeUnknownFieldFail",
+            "ignoreNull");
+    /**
+     * TODO
+     */
+    public static final List<String> JSON5_OBJECT_MAPPER = Arrays.asList("extendTypes",
+            "javaTime",
+            "disableWriteTimestamps",
+            "parameterNames",
+            "withNullSerializer",
+            "closeUnknownFieldFail",
+            "json5");
+    /**
+     * TODO
+     */
+    public static final Map<String, List<String>> PUBLISH_OBJECT_MAPPER_HANDLE_LISTS =
+            MapBuilder.create(new HashMap<String, List<String>>())
+                    .put(COMMON_OBJECT_MAPPER_BUILDER, COMMONS_OBJECT_MAPPER)
+                    .put(IGNORE_NULL_OBJECT_MAPPER_BUILDER, IGNORE_NULL_OBJECT_MAPPER)
+                    .put(JSON5_OBJECT_MAPPER_BUILDER, JSON5_OBJECT_MAPPER)
+                    .build();
+
+    private static final Map<String, Consumer<ObjectMapper>> OBJECT_MAPPER_HANDLER = new ConcurrentHashMap<>();
+
+    static {
+        OBJECT_MAPPER_HANDLER.put("extendTypes", ObjectMapperFactory::extendTypes);
+        OBJECT_MAPPER_HANDLER.put("json5", ObjectMapperFactory::json5);
+        OBJECT_MAPPER_HANDLER.put("javaTime", ObjectMapperFactory::javaTime);
+        OBJECT_MAPPER_HANDLER.put("disableWriteTimestamps", ObjectMapperFactory::disableWriteTimestamps);
+        OBJECT_MAPPER_HANDLER.put("ignoreNull", ObjectMapperFactory::ignoreNull);
+        OBJECT_MAPPER_HANDLER.put("parameterNames", ObjectMapperFactory::parameterNames);
+        OBJECT_MAPPER_HANDLER.put("withNullSerializer", ObjectMapperFactory::withNullSerializer);
+        OBJECT_MAPPER_HANDLER.put("closeUnknownFieldFail", ObjectMapperFactory::closeUnknownFieldFail);
     }
 
     /**
@@ -83,7 +130,7 @@ public class ObjectMapperFactory {
      *
      * @param objectMapper TODO
      */
-    public static void simpleModule(ObjectMapper objectMapper) {
+    public static void extendTypes(ObjectMapper objectMapper) {
         SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(DataObject.class, new DataObjectSerializer());
         simpleModule.addDeserializer(DataObject.class, new DataObjectDeserializer());
@@ -103,7 +150,22 @@ public class ObjectMapperFactory {
      *
      * @param objectMapper TODO
      */
-    public static void javaTimeModule(ObjectMapper objectMapper) {
+    public static void json5(ObjectMapper objectMapper) {
+        objectMapper.enable(ALLOW_UNQUOTED_FIELD_NAMES,
+                ALLOW_TRAILING_COMMA,
+                ALLOW_SINGLE_QUOTES,
+                ALLOW_BACKSLASH_ESCAPING_ANY_CHARACTER,
+                ALLOW_NON_NUMERIC_NUMBERS,
+                ALLOW_LEADING_DECIMAL_POINT_FOR_NUMBERS,
+                ALLOW_COMMENTS);
+    }
+
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     */
+    public static void javaTime(ObjectMapper objectMapper) {
         JavaTimeModule javaTimeModule = new JavaTimeModule();
         javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_TIME_FORMAT)));
         javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT)));
@@ -122,6 +184,7 @@ public class ObjectMapperFactory {
     public static void disableWriteTimestamps(ObjectMapper objectMapper) {
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.disable(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS);
+        objectMapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
     }
 
     /**
@@ -137,30 +200,40 @@ public class ObjectMapperFactory {
      * TODO
      *
      * @param objectMapper TODO
-     * @return TODO
      */
-    public static ObjectMapper buildCommonObjectMapper(ObjectMapper objectMapper) {
-        simpleModule(objectMapper);
-        javaTimeModule(objectMapper);
-        disableWriteTimestamps(objectMapper);
-        objectMapper.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
-        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-
+    public static void parameterNames(ObjectMapper objectMapper) {
         objectMapper.registerModule(new ParameterNamesModule());
-
-        objectMapper.setSerializerFactory(objectMapper.getSerializerFactory().withSerializerModifier(new NullBeanSerializerModifier()));
-        return objectMapper;
     }
 
     /**
      * TODO
      *
      * @param objectMapper TODO
+     */
+    public static void withNullSerializer(ObjectMapper objectMapper) {
+        objectMapper.setSerializerFactory(objectMapper.getSerializerFactory().withSerializerModifier(new NullBeanSerializerModifier()));
+    }
+
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     */
+    public static void closeUnknownFieldFail(ObjectMapper objectMapper) {
+        objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+    }
+
+    /**
+     * TODO
+     *
+     * @param objectMapper TODO
+     * @param handlers     TODO
      * @return TODO
      */
-    public static ObjectMapper buildIgnoreNullObjectMapper(ObjectMapper objectMapper) {
-        buildCommonObjectMapper(objectMapper);
-        ignoreNull(objectMapper);
+    public static ObjectMapper buildWithHandlers(ObjectMapper objectMapper, List<String> handlers) {
+        for (String handler : handlers) {
+            OBJECT_MAPPER_HANDLER.get(handler).accept(objectMapper);
+        }
         return objectMapper;
     }
 
@@ -171,12 +244,11 @@ public class ObjectMapperFactory {
      * @return TODO
      */
     public static ObjectMapper objectMapper(String key) {
-        if (!objectMapperBuilders.containsKey(key)) {
+        if (!PUBLISH_OBJECT_MAPPER_HANDLE_LISTS.containsKey(key)) {
             throw new IllegalStateException(CharSequenceUtil.format("The {} ObjectMapper builder is not register.", key));
         }
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapperBuilders.get(key).accept(objectMapper);
-        return objectMapper;
+        return buildWithHandlers(objectMapper, PUBLISH_OBJECT_MAPPER_HANDLE_LISTS.get(key));
     }
 
     /**
