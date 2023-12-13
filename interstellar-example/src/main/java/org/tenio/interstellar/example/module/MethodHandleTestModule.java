@@ -2,12 +2,10 @@ package org.tenio.interstellar.example.module;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.stereotype.Component;
 import org.tenio.interstellar.functions.LambdaUtils;
 
 import java.lang.invoke.MethodHandle;
 
-@Component
 public class MethodHandleTestModule implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {

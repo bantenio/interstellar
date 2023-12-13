@@ -2,7 +2,6 @@ package org.tenio.interstellar.example.module;
 
 import groovy.lang.GroovyShell;
 import groovy.lang.Script;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -15,13 +14,13 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
-import org.tenio.interstellar.context.DataObject;
 import org.tenio.interstellar.context.spring.JsonNodeAccessor;
 import org.tenio.interstellar.example.vo.UserVO;
 import org.tenio.interstellar.toolkit.JsonUtils;
 
 import java.util.Map;
 
+@Component
 public class JsonNodeAccessorTestModule implements ApplicationRunner, ApplicationContextAware {
     private static final MapAccessor MAP_ACCESSOR = new MapAccessor();
     private static final EnvironmentAccessor ENVIRONMENT_ACCESSOR = new EnvironmentAccessor();
@@ -46,7 +45,8 @@ public class JsonNodeAccessorTestModule implements ApplicationRunner, Applicatio
                 }
                 """;
         Map<String, Object> context = JsonUtils.fromJsonToMap(json);
-        testGroovy(context);
+//        testGroovy(context);
+        testSPEL(context);
     }
 
     protected void testGroovy(Map<String, Object> context) {
@@ -82,7 +82,8 @@ public class JsonNodeAccessorTestModule implements ApplicationRunner, Applicatio
         expression1.setValue(evaluationContext, new UserVO().setName("Tenio").setAge(3));
 
         Expression expression2 = parser.parseExpression("id");
-        System.out.println(expression2.getValue(evaluationContext).getClass());
+        System.out.println(expression2.getValue(evaluationContext));
+        System.out.println(context);
     }
 
     @Override

@@ -87,7 +87,7 @@ public class MongoBaseDao implements Dao {
             documents.projection(fieldsDoc);
         }
         Document document = documents.first();
-        return new DataObject(document);
+        return document == null ? null : new DataObject(document);
     }
 
     @Override
