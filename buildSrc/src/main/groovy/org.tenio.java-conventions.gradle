@@ -47,7 +47,7 @@ javadoc {
 }
 
 jar {
-    baseName "${project_root_name}-${project_name}"
+    archiveBaseName = "${project_root_name}-${project_name}"
 }
 
 def localProperties = new Properties()
