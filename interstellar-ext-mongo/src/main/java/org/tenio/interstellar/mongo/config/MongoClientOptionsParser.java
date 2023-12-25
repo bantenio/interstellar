@@ -3,10 +3,8 @@ package org.tenio.interstellar.mongo.config;
 import cn.hutool.core.util.ObjectUtil;
 import com.mongodb.*;
 import com.mongodb.connection.*;
-import org.bson.codecs.*;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistries;
-import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 import org.tenio.interstellar.context.mongo.DataObjectCodec;
 import org.tenio.interstellar.mongo.config.parser.*;
@@ -22,8 +20,6 @@ import java.util.Optional;
  * &#064;version:    1.0
  */
 public class MongoClientOptionsParser {
-    private final static CodecRegistry commonCodecRegistry = CodecRegistries.fromCodecs(new StringCodec(), new IntegerCodec(),
-            new BooleanCodec(), new DoubleCodec(), new LongCodec(), new BsonDocumentCodec(), new DocumentCodec());
     private final MongoClientSettings settings;
     private final String database;
 
